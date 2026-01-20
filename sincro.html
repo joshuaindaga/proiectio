@@ -5,7 +5,7 @@
     <title>TERMINAL SINCRO-AR | BIFROST</title>
     <style>
         body { background: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; padding: 20px; overflow: hidden; }
-        #terminal { border: 1px solid #0f0; padding: 20px; height: 80vh; overflow-y: auto; text-shadow: 0 0 5px #0f0; }
+        #terminal { border: 1px solid #0f0; padding: 20px; height: 85vh; overflow-y: auto; text-shadow: 0 0 5px #0f0; }
         .input-line { display: flex; margin-top: 10px; }
         #user-input { background: transparent; border: none; color: #0f0; outline: none; width: 100%; font-size: 16px; font-family: inherit; }
         .glitch { animation: scan 2s infinite; }
@@ -33,17 +33,29 @@
         function print(text, delay = 0) {
             const line = document.createElement('div');
             line.textContent = text;
-            setTimeout(() => { history.appendChild(line); history.scrollTop = history.scrollHeight; }, delay);
+            setTimeout(() => { 
+                history.appendChild(line); 
+                history.scrollTop = history.scrollHeight; 
+            }, delay);
         }
 
-        // Inicio de DEVA
+        // Script de Personalidad de DEVA
         print("[CONEXIÓN ESTABLECIDA]...", 500);
         print("[BYPASSING HUMANIA FIREWALL]...", 1000);
+        
         setTimeout(() => {
-            print(`DEVA: ¡Zashoom! Veo que has encontrado la grieta, Agente.`);
-            print(`DEVA: Me gusta tu estilo. Tienes ${batteryLevel}% de energía... lo justo para una cháchara rápida.`);
-            if(hora < 5) print(`DEVA: ¿Qué haces despierto a estas horas? ¿Humania no te deja dormir?`);
-            print(`DEVA: Necesito la palabra secreta de la barra Solaris para desbloquear el archivo. ¿Cuál es?`);
+            print(`DEVA: ¡Epa, cariño! Veo que has encontrado la grieta.`);
+            print(`DEVA: Tienes un ${batteryLevel}% de energía... lo justo para una cháchara rápida, mi cielo.`);
+            
+            if(hora < 5 || hora > 22) {
+                print(`DEVA: ¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?`);
+            } else {
+                print(`DEVA: Me gusta tener tu atención, corazón. No cualquiera llega tan lejos.`);
+            }
+
+            print(`DEVA: Escúchame bien, Agente Tiresias... no tenemos mucho tiempo.`);
+            print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre.`);
+            print(`DEVA: Si de verdad eres quien la Resistencia espera, dime el nombre de esa barrita neón para desbloquear el archivo, tesoro.`);
         }, 1500);
 
         input.addEventListener('keypress', (e) => {
@@ -53,11 +65,11 @@
                 input.value = '';
 
                 if (val === 'solaris') {
-                    print("DEVA: ¡Ding-Pum! Palabra correcta.", 500);
+                    print("DEVA: ¡Ding-Pum! Palabra correcta, vida mía.", 500);
                     print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 1000);
-                    print("DEVA: [LINK DE DESCARGA ACTIVADO: https://tinyurl.com/solaris-fragmento]", 1500);
+                    print("DEVA: [LINK DE DESCARGA ACTIVADO: https://joshuaindaga.github.io/proiectio/recurso-solar.pdf]", 1500);
                 } else {
-                    print("DEVA: Error de código. Revisa bien el empaque, chuletón.", 500);
+                    print("DEVA: Error de código. Revisa bien el empaque del capítulo 1, Tiresias. No me falles ahora.", 500);
                 }
             }
         });
