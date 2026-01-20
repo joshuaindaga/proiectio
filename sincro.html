@@ -24,9 +24,9 @@
             font-size: 16px;
             line-height: 1.5;
             margin-bottom: 10px;
-            scrollbar-width: none; /* Ocultar scroll en Firefox */
+            scrollbar-width: none;
         }
-        #terminal::-webkit-scrollbar { display: none; } /* Ocultar scroll en Chrome/Safari */
+        #terminal::-webkit-scrollbar { display: none; }
 
         .input-line { 
             display: flex; 
@@ -79,34 +79,7 @@
                 line.textContent = text;
                 history.appendChild(line); 
                 history.scrollTop = history.scrollHeight; 
-            }, delay);
-        }
-
-        // --- PROTOCOLO DE INMERSIÓN DEVA ---
-        print("[SISTEMA: CONEXIÓN BIFROST ESTABLECIDA - NODO HUMANIA-NEXO]", 'system', 500);
-        
-        setTimeout(() => {
-            print(`DEVA: ¡Epa, cariño! Veo que encontraste la grieta.`);
-            print(`DEVA: Tienes un ${batteryLevel}% de energía... lo justo para una cháchara rápida, mi cielo.`);
-            
-            if(hora < 5 || hora > 22) {
-                print(`DEVA: ¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?`);
-            } else {
-                print(`DEVA: Me gusta tener tu atención, tesoro. No cualquiera llega tan lejos en la red.`);
-            }
-
-            print(`DEVA: Escúchame bien, Agente Tiresias... no tenemos mucho tiempo.`);
-            print(`DEVA: Marta acaba de ingerir una dosis de 'voltaje químico' para silenciar el hambre.`);
-            print(`DEVA: Si de verdad eres quien la Resistencia espera, dime el nombre de esa barrita neón, corazón.`);
-        }, 1200);
-
-        input.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const rawVal = input.value;
-                const val = rawVal.toLowerCase().trim().replace(/\s+/g, '');
-                
-                print(`> ${rawVal}`, 'system');
-                input.value = '';
+            }                input.value = '';
 
                 if (val === 'solaris') {
                     print("DEVA: ¡Eso es, vida mía! Sabía que eras tú.", 'deva', 500);
