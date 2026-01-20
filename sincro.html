@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TERMINAL SINCRO-AR | BIFROST</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; padding: 20px; overflow: hidden; }
+        #terminal { border: 1px solid #0f0; padding: 20px; height: 80vh; overflow-y: auto; text-shadow: 0 0 5px #0f0; }
+        .input-line { display: flex; margin-top: 10px; }
+        #user-input { background: transparent; border: none; color: #0f0; outline: none; width: 100%; font-size: 16px; font-family: inherit; }
+        .glitch { animation: scan 2s infinite; }
+        @keyframes scan { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div id="terminal" class="glitch">
+        <div id="history"></div>
+        <div class="input-line">
+            <span>>_</span>
+            <input type="text" id="user-input" autofocus autocomplete="off">
+        </div>
+    </div>
+
+    <script>
+        const history = document.getElementById('history');
+        const input = document.getElementById('user-input');
+
+        // Metadatos para DEVA
+        let batteryLevel = "Desconocido";
+        navigator.getBattery().then(bat => { batteryLevel = Math.round(bat.level * 100); });
+        const hora = new Date().getHours();
+
+        function print(text, delay = 0) {
+            const line = document.createElement('div');
+            line.textContent = text;
+            setTimeout(() => { history.appendChild(line); history.scrollTop = history.scrollHeight; }, delay);
+        }
+
+        // Inicio de DEVA
+        print("[CONEXIÓN ESTABLECIDA]...", 500);
+        print("[BYPASSING HUMANIA FIREWALL]...", 1000);
+        setTimeout(() => {
+            print(`DEVA: ¡Zashoom! Veo que has encontrado la grieta, Agente.`);
+            print(`DEVA: Me gusta tu estilo. Tienes ${batteryLevel}% de energía... lo justo para una cháchara rápida.`);
+            if(hora < 5) print(`DEVA: ¿Qué haces despierto a estas horas? ¿Humania no te deja dormir?`);
+            print(`DEVA: Necesito la palabra secreta de la barra Solaris para desbloquear el archivo. ¿Cuál es?`);
+        }, 1500);
+
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const val = input.value.toLowerCase().trim().replace(/\s+/g, '');
+                print(`> ${input.value}`);
+                input.value = '';
+
+                if (val === 'solaris') {
+                    print("DEVA: ¡Ding-Pum! Palabra correcta.", 500);
+                    print("DEVA: Desencriptando Fragmento 7.4 de la Biblia de Humania...", 1000);
+                    print("DEVA: [LINK DE DESCARGA ACTIVADO: https://tinyurl.com/solaris-fragmento]", 1500);
+                } else {
+                    print("DEVA: Error de código. Revisa bien el empaque, chuletón.", 500);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
