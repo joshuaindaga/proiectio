@@ -12,27 +12,28 @@
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.9); z-index: 100; backdrop-filter: blur(10px); }
         .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1rem; }
 
-        /* Estilo general de Sliders */
-        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-radius: 0; }
-        .slide-track { display: flex; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .slide-item { min-width: 100%; position: relative; }
+        /* --- ESTILO DE SLIDERS INTERACTIVOS --- */
+        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; }
+        .slide-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; }
         .slide-item img { width: 100%; height: auto; display: block; }
         
-        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 40px 20px 20px; text-align: left; }
-        .label-overlay h3 { color: var(--cian); font-size: 1.5rem; }
-        .label-overlay p { font-size: 0.9rem; opacity: 0.8; }
+        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 50px 20px 30px; text-align: left; }
+        .label-overlay h3 { color: var(--cian); font-size: 1.5rem; margin-bottom: 5px; }
+        
+        /* Puntos de navegación (Bullets) */
+        .dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--cian); transform: scale(1.3); }
 
-        .section-title { padding: 60px 20px 20px; text-align: center; background: #fff; }
+        .section-title { padding: 60px 20px 20px; text-align: center; }
         .section-title h2 { font-weight: 200; font-size: 2.2rem; letter-spacing: -1px; }
 
-        /* Hero Image */
-        .hero { width: 100%; background: var(--gris-claro); }
-        .hero img { width: 100%; height: auto; display: block; }
+        /* --- HERO & SECCIONES --- */
+        .hero-link { display: block; text-decoration: none; background: var(--gris-claro); }
+        .hero-link img { width: 100%; height: auto; display: block; }
 
-        /* Seccion REM Final */
-        .rem-section { width: 100%; margin-top: 40px; border-top: 1px solid #eee; }
-
-        /* Mite Widget */
+        /* Mite Chat Widget */
         #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         #mite-bubble { width: 65px; height: 65px; cursor: pointer; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.3)); }
         #chat-window { position: fixed; bottom: 95px; right: 20px; width: 280px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; }
@@ -41,7 +42,7 @@
         .mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; }
         .opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 10px; font-size: 0.7rem; cursor: pointer; margin: 2px; }
 
-        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; background: #fff; border-top: 1px solid #eee; }
+        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; border-top: 1px solid #eee; }
         .secret-link { opacity: 0.05; text-decoration: none; color: #000; }
     </style>
 </head>
@@ -52,86 +53,80 @@
         <div style="font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 5px;">A.N.I.M.A. SINCRO: ON</div>
     </header>
 
-    <!-- 1. HERO SECTION -->
-    <section class="hero">
+    <!-- FASE 1: HERO (LA PROMESA) - Todo el Hero es un enlace -->
+    <a href="#" class="hero-link">
         <img src="multimedia/hero.jpg" alt="Un Mañana Sin Sombras">
         <div style="padding: 40px 20px; text-align: center;">
-            <h1 style="font-weight: 200;">Un Mañana Sin Sombras</h1>
-            <p style="color: #86868b;">Bienvenido a la Era de la Sincronía.</p>
+            <h1 style="font-weight: 200; color: #1d1d1f;">Un Mañana Sin Sombras</h1>
+            <p style="color: #86868b;">Toque para conocer la historia de la Sincronía.</p>
         </div>
-    </section>
+    </a>
 
-    <!-- 2. CATÁLOGO DE ADICCIÓN (SUBMUNDOS) -->
+    <!-- FASE 2: CATÁLOGO DE ADICCIÓN (SUBMUNDOS) -->
     <div class="section-title">
         <h2>Ecosistemas de Inmersión</h2>
-        <p style="color: #86868b; margin-top: 5px;">¿Quién quieres ser hoy?</p>
+        <p style="color: #86868b;">Seleccione su destino de hoy.</p>
     </div>
-    <div class="slider-wrapper">
+    <div class="slider-wrapper" id="slider-catalog">
         <div class="slide-track" id="catalog-track">
-            <!-- OLYMPUS -->
-            <div class="slide-item">
+            <!-- Cada slide es un enlace interactivo -->
+            <a href="#" class="slide-item">
                 <img src="multimedia/Olympus.jpeg" alt="Olympus V-Games">
                 <div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial biológico.</p></div>
-            </div>
-            <!-- ARCADIA -->
-            <div class="slide-item">
+            </a>
+            <a href="#" class="slide-item">
                 <img src="multimedia/arcadia.jpg" alt="Arcadia Eterna">
                 <div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza que la historia nos arrebató.</p></div>
-            </div>
-            <!-- BESO PROHIBIDO -->
-            <div class="slide-item">
+            </a>
+            <a href="#" class="slide-item">
                 <img src="multimedia/elbeso.jpg" alt="El Beso Prohibido">
                 <div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div>
-            </div>
-            <!-- NEON NIRVANA -->
-            <div class="slide-item">
+            </a>
+            <a href="#" class="slide-item">
                 <img src="multimedia/neon.png" alt="Neon Nirvana">
-                <div class="label-overlay"><h3>Neon Nirvana</h3><p>Hedonismo sensorial bajo vigilancia.</p></div>
-            </div>
-            <!-- CHRONOS -->
-            <div class="slide-item">
+                <div class="label-overlay"><h3>Neon Nirvana</h3><p>Sensaciones puras bajo vigilancia.</p></div>
+            </a>
+            <a href="#" class="slide-item">
                 <img src="multimedia/chronos.png" alt="Chronos">
-                <div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div>
-            </div>
+                <div class="label-overlay"><h3>Chronos</h3><p>La historia grabada en su piel.</p></div>
+            </a>
         </div>
+        <div class="dots-container" id="catalog-dots"></div>
     </div>
 
-    <!-- 3. CICLO DE RECARGA (SOLARIS / VELVET) -->
+    <!-- FASE 3: CICLO DE RECARGA (SOLARIS / VELVET) -->
     <div class="section-title">
         <h2>Ciclo de Recarga</h2>
-        <p style="color: #86868b;">Combustible para la jornada operativa.</p>
+        <p style="color: #86868b;">Combustible biológico de Nivel 7.</p>
     </div>
-    <div class="slider-wrapper">
+    <div class="slider-wrapper" id="slider-nutri">
         <div class="slide-track" id="nutri-track">
-            <div class="slide-item">
+            <a href="#" class="slide-item">
                 <img src="multimedia/solaris-web.png" alt="Solaris">
-                <div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro para su ADN.</p></div>
-            </div>
-            <div class="slide-item">
+                <div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro para su jornada.</p></div>
+            </a>
+            <a href="#" class="slide-item">
                 <img src="multimedia/velvet-web.png" alt="Velvet">
-                <div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>El interruptor del descanso.</p></div>
-            </div>
+                <div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>El interruptor definitivo del descanso.</p></div>
+            </a>
         </div>
+        <div class="dots-container" id="nutri-dots"></div>
     </div>
 
-    <!-- 4. MECANICA SUEÑO (FINAL) -->
-    <section class="rem-section">
-        <img src="multimedia/sueño.jpg" style="width: 100%; height: auto;" alt="Sincronía REM">
+    <!-- FASE 4: MECANICA SUEÑO (FINAL) -->
+    <div class="section-title"><h2>Sincronía REM</h2></div>
+    <a href="#" class="hero-link" onclick="window.location.href='seguridad.html'">
+        <img src="multimedia/sueño.jpg" alt="Sincronía REM">
         <div style="padding: 40px 20px; text-align: center; background: #f5f5f7;">
-            <h2 style="font-weight: 300;">Sincronía REM</h2>
-            <p style="color: #666; max-width: 600px; margin: 20px auto;">Optimice su existencia. Proiectio le permite habitar sus deseos mientras su cuerpo se recupera.</p>
-            
-            <section style="margin-top: 40px;">
-                <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">ID BIOMÉTRICO REQUERIDO</p>
-                <button onclick="window.location.href='seguridad.html'" style="padding: 15px 40px; background: #000; color: #fff; border: none; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer;">CONECTAR</button>
-            </section>
+            <p style="color: #666; max-width: 600px; margin: 0 auto 20px;">Habite sus deseos mientras su cuerpo alcanza la eficiencia total.</p>
+            <button style="padding: 15px 40px; background: #000; color: #fff; border: none; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer;">CONECTAR</button>
         </div>
-    </section>
+    </a>
 
-    <!-- MITE WIDGET -->
+    <!-- WIDGET MITE -->
     <div id="mite-widget">
         <div id="chat-window">
-            <div class="chat-header"><span>MITE Assistant</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
+            <div class="chat-header"><span>MITE Virtual Assistant</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
             <div class="chat-body" id="chat-log">
                 <div class="mite-msg">¡Zashoom! Soy Mite. ¿Quieres comprar Fragmentos de Éter? ¡Ding-Pum! 💎</div>
             </div>
@@ -145,25 +140,45 @@
 
     <footer>
         <p>&copy; 202X HUMANIA GLOBAL SYSTEMS. "VOLUNTAS PRO PACE".</p>
-        <br>
         <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8_sincronia_caotica_detectada</a>
     </footer>
 
     <script>
-        // Control de Sliders
-        function setupSlider(trackId, count, interval) {
-            let index = 0;
+        // --- LÓGICA DE CONTROL DE SLIDERS ---
+        function initSlider(trackId, dotsId, count) {
             const track = document.getElementById(trackId);
+            const dotsContainer = document.getElementById(dotsId);
+            let index = 0;
+
+            // Crear los puntos (dots)
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => { goToSlide(i); };
+                dotsContainer.appendChild(dot);
+            }
+
+            function goToSlide(n) {
+                index = n;
+                track.style.transform = `translateX(-${index * 100}%)`;
+                const dots = dotsContainer.querySelectorAll('.dot');
+                dots.forEach((d, i) => d.className = 'dot' + (i === index ? ' active' : ''));
+            }
+
+            // Auto-deslizar cada 6 segundos
             setInterval(() => {
                 index = (index + 1) % count;
-                track.style.transform = `translateX(-${index * 100}%)`;
-            }, interval);
+                goToSlide(index);
+            }, 6000);
         }
 
-        setupSlider('catalog-track', 5, 6000); // 5 submundos, cada 6 seg
-        setupSlider('nutri-track', 2, 5000);   // 2 nutrición, cada 5 seg
+        // Inicializar sliders al cargar
+        window.onload = () => {
+            initSlider('catalog-track', 'catalog-dots', 5);
+            initSlider('nutri-track', 'nutri-dots', 2);
+        };
 
-        // Mite Chat (Modularizado)
+        // Mite Chat
         function toggleChat() {
             const chat = document.getElementById('chat-window');
             chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
@@ -171,20 +186,19 @@
         function miteDice(t) {
             const log = document.getElementById('chat-log');
             const resp = {
-                'sincronia': ["¡Eficiencia mental al 100%! 🚀", "¡En Proiectio puedes volar, cariño! 💎", "Es el puente al BIFROST. ✨"],
-                'eter': ["¡El sudor se convierte en oro digital! 💸", "¿Quieres una skin de Dragón? ¡Usa tu Éter! 🐉"]
+                'sincronia': ["¡Eficiencia mental al 100%! 🚀", "¡En Proiectio puedes volar, cariño! 💎"],
+                'eter': ["¡El sudor se convierte en oro digital! 💸", "¿Quieres una skin de Dragón? 🐉"]
             };
-            const m = document.createElement('div');
-            m.className = 'mite-msg';
+            const m = document.createElement('div'); m.className = 'mite-msg'; 
             m.textContent = "MITE: " + resp[t][Math.floor(Math.random() * resp[t].length)];
             log.appendChild(m); log.scrollTop = log.scrollHeight;
         }
 
-        // Entradas Secretas
+        // Secreto Matrix
         document.getElementById('matrix-trigger').addEventListener('click', function(e) {
             e.preventDefault(); document.body.style.filter = "invert(1) hue-rotate(90deg)";
             setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 1500);
         });
     </script>
 </body>
-        </html>
+</html>
