@@ -2,96 +2,86 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALERTA DE SEGURIDAD | HUMANIA CORP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo de Seguridad 7.02 | Humania</title>
     <style>
         body { 
-            background-color: #000; 
-            color: #ff0000; 
-            font-family: 'Courier New', Courier, monospace; 
+            background-color: #f4f4f7; 
+            color: #1d1d1f; 
+            font-family: 'SF Mono', 'Courier New', monospace; 
             margin: 0; 
             padding: 20px; 
-            height: 100vh; 
             display: flex; 
-            flex-direction: column; 
-            overflow: hidden;
-            border: 5px solid #ff0000;
-            animation: pulse-border 1.5s infinite;
+            justify-content: center;
         }
-
-        @keyframes pulse-border {
-            0% { border-color: #ff0000; }
-            50% { border-color: #330000; }
-            100% { border-color: #ff0000; }
+        .report-container { 
+            background: #fff; 
+            width: 100%; 
+            max-width: 700px; 
+            border: 1px solid #d1d1d6; 
+            padding: 40px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            min-height: 90vh;
         }
-
-        #alert-header { text-align: center; border-bottom: 2px solid #ff0000; padding-bottom: 10px; margin-bottom: 20px; }
-        #terminal { flex-grow: 1; font-size: 14px; line-height: 1.6; }
-        .critical { font-weight: bold; text-transform: uppercase; background: #ff0000; color: #000; padding: 2px 5px; }
-        .glitch-text { animation: glitch 0.2s infinite; }
+        .header { border-bottom: 2px solid #00c3ff; padding-bottom: 20px; margin-bottom: 30px; }
+        .header h1 { font-size: 1.2rem; font-weight: bold; color: #ff3b30; margin-bottom: 5px; }
+        .header p { font-size: 0.8rem; color: #8e8e93; }
         
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
+        .meta-line { margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; border-left: 3px solid #eee; padding-left: 15px; }
+        .label { color: #8e8e93; font-size: 0.7rem; display: block; text-transform: uppercase; }
+        .data { color: #1d1d1f; font-weight: bold; }
+        
+        .system-msg { background: #fff3f2; border: 1px solid #ffccbc; padding: 15px; color: #d32f2f; font-size: 0.8rem; margin-top: 30px; }
+        .footer-note { margin-top: 50px; font-size: 0.7rem; color: #8e8e93; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div id="alert-header">
-        <h1 class="glitch-text">VIOLACIÓN DE PROTOCOLO DETECTADA</h1>
-        <p>SISTEMA CENTRAL DE SEGURIDAD (VANCE-CORE)</p>
-    </div>
+    <div class="report-container">
+        <div class="header">
+            <h1>SECURITY INCIDENT REPORT #HN-7729</h1>
+            <p>HUMANIA CYBER-DEFENSE UNIT | VANCE CORE ADVISORY</p>
+        </div>
 
-    <div id="terminal">
-        <div id="log"></div>
+        <div id="log">
+            <div class="meta-line">
+                <span class="label">Estado del Incidente</span>
+                <span class="data">VIOLACIÓN DE PROTOCOLO DE ACCESO DETECTADA</span>
+            </div>
+        </div>
+
+        <div class="system-msg">
+            <strong>ADVERTENCIA:</strong> Se ha detectado un intento de ingreso mediante credenciales no autorizadas. De acuerdo con el Tratado de Asistencia Soberana, sus datos han sido procesados. No intente abandonar su ubicación actual.
+        </div>
+
+        <p class="footer-note">Propiedad confidencial de Humania Corp. La divulgación de este reporte conlleva sanciones de Nivel 7.</p>
     </div>
 
     <script>
         const log = document.getElementById('log');
-        const userAgent = navigator.userAgent;
-        let device = "Desconocido";
 
-        // Detección simple de dispositivo
-        if (userAgent.match(/Android/i)) device = "Dispositivo Móvil Android";
-        else if (userAgent.match(/iPhone/i)) device = "Apple Mobile Device (iP)";
-        else device = "Estación de Trabajo Fija (PC/Mac)";
-
-        function addLog(text, isCritical = false, delay = 0) {
+        function addInfo(label, data, delay) {
             setTimeout(() => {
-                const p = document.createElement('p');
-                if(isCritical) p.className = 'critical';
-                p.innerHTML = text;
-                log.appendChild(p);
-                window.scrollTo(0, document.body.scrollHeight);
+                const div = document.createElement('div');
+                div.className = 'meta-line';
+                div.innerHTML = `<span class="label">${label}</span><span class="data">${data}</span>`;
+                log.appendChild(div);
             }, delay);
         }
 
-        addLog("> INICIANDO RASTREO BIOMÉTRICO...", false, 500);
-        addLog("> ACCESO NO AUTORIZADO A ARCHIVOS DE NIVEL 7.", false, 1000);
-        addLog(`> IDENTIFICANDO HARDWARE: <span style="color:white">${device}</span>`, false, 1500);
-
-        // --- Obtención de IP y Ubicación Real ---
+        addInfo("Rastreo de Hardware", "Identificado rastro de señal móvil/fija", 500);
+        
         fetch('https://ipapi.co/json/')
             .then(res => res.json())
             .then(data => {
-                addLog(`> DIRECCIÓN IP LOCALIZADA: <span style="color:white">${data.ip}</span>`, true, 2000);
-                addLog(`> NODO DE ORIGEN: <span style="color:white">${data.city}, ${data.country_name}</span>`, true, 2500);
-                addLog(`> PROVEEDOR DE RED: <span style="color:white">${data.org}</span>`, false, 3000);
-                addLog("> ---", false, 3500);
-                addLog("> ENVIANDO COORDENADAS A LA GUARDIA CIVIL...", false, 4000);
-                addLog("> UNIDAD DE RESPUESTA RÁPIDA (U.R.R.) DESPLEGADA.", true, 4500);
-                addLog(`> TIEMPO ESTIMADO DE INTERVENCIÓN EN ${data.city.toUpperCase()}: 4 MINUTOS.`, false, 5000);
-                addLog("> ADVERTENCIA: LA RECALIBRACIÓN NEURONAL ES OBLIGATORIA.", true, 6000);
-                addLog("> NO CIERRE ESTA VENTANA. LA RESISTENCIA ES INÚTIL.", false, 7000);
+                addInfo("Dirección IP de Origen", data.ip, 1000);
+                addInfo("Geolocalización Aproximada", `${data.city}, ${data.country_name}`, 1500);
+                addInfo("Proveedor de Servicio", data.org, 2000);
+                addInfo("Unidad de Respuesta", "U.R.R. Mazatlán - Desplegada", 2500);
+                addInfo("Estado de Objetivo", "RECUALIFICACIÓN NEURONAL PENDIENTE", 3000);
             })
             .catch(() => {
-                addLog("> ERROR EN EL RASTREO: BLOQUEO DE PRIVACIDAD DETECTADO.", true, 2000);
-                addLog("> ACTIVANDO PROTOCOLO DE FUERZA BRUTA...", false, 2500);
+                addInfo("Error de Rastreo", "Bypass detectado. Iniciando escaneo de Red A.N.I.M.A.", 1000);
             });
     </script>
 </body>
