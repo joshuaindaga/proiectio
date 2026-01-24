@@ -1,153 +1,143 @@
-ó<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PROIECTIO | El Futuro del Sueño</title>
     <style>
-        :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f8f9fa; --texto: #1d1d1f; --oro: #d4af37; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; scroll-behavior: smooth; }
+        :root { --cian: #00c3ff; --blanco: #ffffff; --gris-claro: #f5f5f7; --texto: #1d1d1f; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
         body { background-color: var(--blanco); color: var(--texto); overflow-x: hidden; }
 
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: rgba(255,255,255,0.9); z-index: 100; backdrop-filter: blur(10px); }
-        .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1.1rem; }
-        
-        /* Efecto Parallax General */
-        .parallax { height: 60vh; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; display: flex; align-items: center; justify-content: center; }
-        @media (max-width: 768px) { .parallax { background-attachment: scroll; } }
+        .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1rem; }
 
-        /* 1. SECCION HERO */
-        .hero-img { background-image: url('multimedia/hero.jpg'); height: 80vh; }
-        .hero-text { background: rgba(255, 255, 255, 0.8); padding: 30px; text-align: center; backdrop-filter: blur(5px); }
-
-        /* 2. CARRUSEL ADICCIÓN (5 Submundos) */
-        .catalog-header { padding: 60px 20px 20px; text-align: center; background: #000; color: #fff; }
-        .carousel-container { background: #000; padding-bottom: 60px; }
-        .scroll-wrapper { display: flex; overflow-x: auto; gap: 20px; padding: 20px; scrollbar-width: none; scroll-snap-type: x mandatory; }
-        .scroll-wrapper::-webkit-scrollbar { display: none; }
-        .sub-card { min-width: 85vw; height: 450px; background-size: cover; background-position: center; border-radius: 25px; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; scroll-snap-align: center; border: 1px solid #222; }
-        @media (min-width: 768px) { .sub-card { min-width: 400px; } }
-        .sub-card h3 { color: var(--cian); font-size: 1.8rem; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
-        .sub-card p { color: #ccc; text-shadow: 0 1px 5px rgba(0,0,0,0.8); }
-
-        /* 3. CARRUSEL NUTRICIÓN (Solaris / Velvet) */
-        .nutrition-section { padding: 80px 20px; text-align: center; background: var(--gris-claro); }
-        .dual-slider { max-width: 900px; margin: 0 auto; overflow: hidden; border-radius: 30px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        /* Estilo general de Sliders */
+        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-radius: 0; }
         .slide-track { display: flex; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-        .nutri-slide { min-width: 100%; position: relative; }
-        .nutri-slide img { width: 100%; display: block; }
-        .nutri-label { position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.6); color: #fff; padding: 10px 20px; border-radius: 10px; backdrop-filter: blur(5px); }
+        .slide-item { min-width: 100%; position: relative; }
+        .slide-item img { width: 100%; height: auto; display: block; }
+        
+        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 40px 20px 20px; text-align: left; }
+        .label-overlay h3 { color: var(--cian); font-size: 1.5rem; }
+        .label-overlay p { font-size: 0.9rem; opacity: 0.8; }
 
-        /* 4. SECCION SUEÑO (Mecánica Final) */
-        .sleep-img { background-image: url('multimedia/sueño.png'); height: 70vh; }
+        .section-title { padding: 60px 20px 20px; text-align: center; background: #fff; }
+        .section-title h2 { font-weight: 200; font-size: 2.2rem; letter-spacing: -1px; }
 
-        /* MITE WIDGET */
+        /* Hero Image */
+        .hero { width: 100%; background: var(--gris-claro); }
+        .hero img { width: 100%; height: auto; display: block; }
+
+        /* Seccion REM Final */
+        .rem-section { width: 100%; margin-top: 40px; border-top: 1px solid #eee; }
+
+        /* Mite Widget */
         #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        #mite-bubble { width: 70px; height: 70px; cursor: pointer; transition: 0.3s; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.4)); }
-        #chat-window { position: fixed; bottom: 100px; right: 20px; width: 300px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; flex-direction: column; overflow: hidden; }
-        .chat-header { background: var(--cian); color: white; padding: 12px; font-size: 0.8rem; font-weight: bold; display: flex; justify-content: space-between; }
-        .chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.85rem; }
-        .mite-msg { background: #f0f0f5; padding: 8px 12px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; color: #333; }
-        .opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 12px; font-size: 0.7rem; cursor: pointer; margin: 2px; transition: 0.2s; }
-        .opt-btn:hover { background: var(--cian); color: #fff; }
+        #mite-bubble { width: 65px; height: 65px; cursor: pointer; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.3)); }
+        #chat-window { position: fixed; bottom: 95px; right: 20px; width: 280px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; }
+        .chat-header { background: var(--cian); color: white; padding: 12px; font-weight: bold; font-size: 0.8rem; display: flex; justify-content: space-between; }
+        .chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.8rem; }
+        .mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; }
+        .opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 10px; font-size: 0.7rem; cursor: pointer; margin: 2px; }
 
-        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #999; background: #fff; }
-        .secret-link { opacity: 0.05; text-decoration: none; color: #000; cursor: default; }
-        .matrix-collapse { filter: invert(1) hue-rotate(90deg); transition: 2s; background: #000 !important; }
+        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; background: #fff; border-top: 1px solid #eee; }
+        .secret-link { opacity: 0.05; text-decoration: none; color: #000; }
     </style>
 </head>
-<body id="main-body">
+<body>
 
     <header>
         <div class="logo">PROIECTIO&trade;</div>
-        <div style="font-size: 0.6rem; color: var(--cian);">A.N.I.M.A. SINCRO: ONLINE</div>
+        <div style="font-size: 0.6rem; color: var(--cian); border: 1px solid var(--cian); padding: 2px 5px;">A.N.I.M.A. SINCRO: ON</div>
     </header>
 
-    <!-- 1. HERO (LA PROMESA) -->
-    <section class="parallax hero-img">
-        <div class="hero-text">
-            <h1>Un Mañana Sin Sombras</h1>
-            <p style="color:var(--cian); font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;">TECNOLOGÍA NEURONAL NIVEL 7</p>
+    <!-- 1. HERO SECTION -->
+    <section class="hero">
+        <img src="multimedia/hero.jpgo" alt="Un Mañana Sin Sombras">
+        <div style="padding: 40px 20px; text-align: center;">
+            <h1 style="font-weight: 200;">Un Mañana Sin Sombras</h1>
+            <p style="color: #86868b;">Bienvenido a la Era de la Sincronía.</p>
         </div>
     </section>
 
-    <!-- 2. CATÁLOGO DE ADICCIÓN (5 SUBMUNDOS) -->
-    <div class="catalog-header">
+    <!-- 2. CATÁLOGO DE ADICCIÓN (SUBMUNDOS) -->
+    <div class="section-title">
         <h2>Ecosistemas de Inmersión</h2>
-        <p style="color: #666; font-size: 0.9rem;">¿Quién quieres ser hoy? Elige tu destino.</p>
+        <p style="color: #86868b; margin-top: 5px;">¿Quién quieres ser hoy?</p>
     </div>
-    <section class="carousel-container">
-        <div class="scroll-wrapper" id="catalog-scroll">
-            <!-- ARCADIA -->
-            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/arcadia.jpg')">
-                <h3>Arcadia Eterna</h3>
-                <p>El refugio natural que la historia nos arrebató.</p>
+    <div class="slider-wrapper">
+        <div class="slide-track" id="catalog-track">
+            <!-- OLYMPUS -->
+            <div class="slide-item">
+                <img src="multimedia/Olympus.jpeg" alt="Olympus V-Games">
+                <div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial biológico.</p></div>
             </div>
-            <!-- COLISEO -->
-            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/coliseo.jpg')">
-                <h3>Coliseo Etérico</h3>
-                <p>Forja tu leyenda en el combate infinito. ¡Zashoom!</p>
+            <!-- ARCADIA -->
+            <div class="slide-item">
+                <img src="multimedia/arcadia.jpg" alt="Arcadia Eterna">
+                <div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza que la historia nos arrebató.</p></div>
             </div>
             <!-- BESO PROHIBIDO -->
-            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/elbeso.jpg')">
-                <h3>El Beso Prohibido</h3>
-                <p>Donde los adioses nunca ocurrieron.</p>
+            <div class="slide-item">
+                <img src="multimedia/elbeso.jpg" alt="El Beso Prohibido">
+                <div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div>
             </div>
-            <!-- NEON (Placeholder) -->
-            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/neon.png')">
-                <h3>Neon Nirvana</h3>
-                <p>Hedonismo sensorial bajo vigilancia absoluta.</p>
+            <!-- NEON NIRVANA -->
+            <div class="slide-item">
+                <img src="multimedia/neon.png" alt="Neon Nirvana">
+                <div class="label-overlay"><h3>Neon Nirvana</h3><p>Hedonismo sensorial bajo vigilancia.</p></div>
             </div>
-            <!-- CHRONOS (Placeholder) -->
-            <div class="sub-card" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('multimedia/chronos.png')">
-                <h3>Chronos</h3>
-                <p>Habita el pasado. Aprende de los Gigantes.</p>
+            <!-- CHRONOS -->
+            <div class="slide-item">
+                <img src="multimedia/chronos.png" alt="Chronos">
+                <div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div>
             </div>
+        </div>
+    </div>
+
+    <!-- 3. CICLO DE RECARGA (SOLARIS / VELVET) -->
+    <div class="section-title">
+        <h2>Ciclo de Recarga</h2>
+        <p style="color: #86868b;">Combustible para la jornada operativa.</p>
+    </div>
+    <div class="slider-wrapper">
+        <div class="slide-track" id="nutri-track">
+            <div class="slide-item">
+                <img src="multimedia/solaris-web.png" alt="Solaris">
+                <div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro para su ADN.</p></div>
+            </div>
+            <div class="slide-item">
+                <img src="multimedia/velvet-web.png" alt="Velvet">
+                <div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>El interruptor del descanso.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MECANICA SUEÑO (FINAL) -->
+    <section class="rem-section">
+        <img src="multimedia/sueño.jpg" style="width: 100%; height: auto;" alt="Sincronía REM">
+        <div style="padding: 40px 20px; text-align: center; background: #f5f5f7;">
+            <h2 style="font-weight: 300;">Sincronía REM</h2>
+            <p style="color: #666; max-width: 600px; margin: 20px auto;">Optimice su existencia. Proiectio le permite habitar sus deseos mientras su cuerpo se recupera.</p>
+            
+            <section style="margin-top: 40px;">
+                <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">ID BIOMÉTRICO REQUERIDO</p>
+                <button onclick="window.location.href='seguridad.html'" style="padding: 15px 40px; background: #000; color: #fff; border: none; font-size: 0.8rem; letter-spacing: 2px; cursor: pointer;">CONECTAR</button>
+            </section>
         </div>
     </section>
 
-    <!-- 3. NUTRICIÓN (Solaris / Velvet Carousel) -->
-    <section class="nutrition-section">
-        <h2 style="margin-bottom: 30px;">Ciclo de Recarga Humana</h2>
-        <div class="dual-slider">
-            <div class="slide-track" id="nutri-track">
-                <div class="nutri-slide">
-                    <img src="multimedia/solaris-web.png" alt="Solaris">
-                    <div class="nutri-label">FASE DIURNA: SOLARIS</div>
-                </div>
-                <div class="nutri-slide">
-                    <img src="multimedia/velvet-web.png" alt="Velvet">
-                    <div class="nutri-label">FASE NOCTURNA: VELVET</div>
-                </div>
-            </div>
-        </div>
-        <p style="margin-top: 30px; max-width: 600px; margin-left: auto; margin-right: auto; color: #666;">
-            Optimice su rendimiento operativo. Solaris para la acción, Velvet para el reinicio. El equilibrio perfecto para el ciudadano de hoy.
-        </p>
-    </section>
-
-    <!-- 4. MECANICA SUEÑO -->
-    <section class="parallax sleep-img">
-        <div class="hero-text">
-            <h2>Sincronía REM</h2>
-            <p>Donde tus deseos toman forma.</p>
-        </div>
-    </section>
-
-    <!-- WIDGET MITE -->
+    <!-- MITE WIDGET -->
     <div id="mite-widget">
         <div id="chat-window">
-            <div class="chat-header">
-                <span>MITE - Virtual Assistant</span>
-                <span onclick="toggleChat()" style="cursor:pointer">✕</span>
-            </div>
+            <div class="chat-header"><span>MITE Assistant</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
             <div class="chat-body" id="chat-log">
-                <div class="mite-msg">¡Zashoom! Soy Mite, tu guía hacia la felicidad. ¿Qué quieres comprar hoy? ¡Ding-Pum! 💎</div>
+                <div class="mite-msg">¡Zashoom! Soy Mite. ¿Quieres comprar Fragmentos de Éter? ¡Ding-Pum! 💎</div>
             </div>
-            <div style="padding: 10px; border-top: 1px solid #eee; display: flex; flex-wrap: wrap;">
+            <div style="padding: 10px; border-top: 1px solid #eee;">
                 <button class="opt-btn" onclick="miteDice('sincronia')">Sincronía</button>
-                <button class="opt-btn" onclick="miteDice('eter')">Ganar Éter</button>
-                <button class="opt-btn" onclick="miteDice('vance')">Seguridad</button>
+                <button class="opt-btn" onclick="miteDice('eter')">Gamas Éter</button>
             </div>
         </div>
         <img src="multimedia/mite.png" id="mite-bubble" onclick="toggleChat()" alt="Mite">
@@ -160,7 +150,20 @@
     </footer>
 
     <script>
-        // Mite Chat Dinámico
+        // Control de Sliders
+        function setupSlider(trackId, count, interval) {
+            let index = 0;
+            const track = document.getElementById(trackId);
+            setInterval(() => {
+                index = (index + 1) % count;
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }, interval);
+        }
+
+        setupSlider('catalog-track', 5, 6000); // 5 submundos, cada 6 seg
+        setupSlider('nutri-track', 2, 5000);   // 2 nutrición, cada 5 seg
+
+        // Mite Chat (Modularizado)
         function toggleChat() {
             const chat = document.getElementById('chat-window');
             chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
@@ -168,48 +171,20 @@
         function miteDice(t) {
             const log = document.getElementById('chat-log');
             const resp = {
-                'sincronia': ["¡Es la gloria! Eficiencia mental al 100%. 🚀", "¡En Proiectio puedes volar, cariño! 💎", "Es el puente al BIFROST. ¡Zashoom! ✨"],
-                'eter': ["¡El sudor se convierte en oro digital! 💸", "¿Quieres esa skin de Dragón? ¡Usa tu Éter! 🐉", "¡Sin reembolsos, precioso cliente! 💎"],
-                'vance': ["Vance vigila tus pensamientos para que tú no sufras. 🛡️", "¡Paz total bajo la Red A.N.I.M.A.! 🕊️", "Acceso denegado. ¡Pero yo te cuido mejor! 🤖"]
+                'sincronia': ["¡Eficiencia mental al 100%! 🚀", "¡En Proiectio puedes volar, cariño! 💎", "Es el puente al BIFROST. ✨"],
+                'eter': ["¡El sudor se convierte en oro digital! 💸", "¿Quieres una skin de Dragón? ¡Usa tu Éter! 🐉"]
             };
-            const pool = resp[t];
-            const msg = document.createElement('div');
-            msg.className = 'mite-msg';
-            msg.textContent = "MITE: " + pool[Math.floor(Math.random() * pool.length)];
-            log.appendChild(msg);
-            log.scrollTop = log.scrollHeight;
+            const m = document.createElement('div');
+            m.className = 'mite-msg';
+            m.textContent = "MITE: " + resp[t][Math.floor(Math.random() * resp[t].length)];
+            log.appendChild(m); log.scrollTop = log.scrollHeight;
         }
 
-        // Auto-Slider Nutrición (Solaris/Velvet)
-        let nutriIndex = 0;
-        setInterval(() => {
-            nutriIndex = (nutriIndex + 1) % 2;
-            document.getElementById('nutri-track').style.transform = `translateX(-${nutriIndex * 100}%)`;
-        }, 5000);
-
-        // Matrix Link
+        // Entradas Secretas
         document.getElementById('matrix-trigger').addEventListener('click', function(e) {
-            e.preventDefault(); document.body.classList.add('matrix-collapse');
-            setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
-        });
-
-        // Shake Motion
-        let lastX, lastY, lastZ, lastUpdate = 0;
-        window.addEventListener('devicemotion', function(e) {
-            let acc = e.accelerationIncludingGravity;
-            let now = new Date().getTime();
-            if ((now - lastUpdate) > 100) {
-                let diff = now - lastUpdate; lastUpdate = now;
-                let speed = Math.abs(acc.x + acc.y + acc.z - lastX - lastY - lastZ) / diff * 10000;
-                if (speed > 2000) window.location.href = "sincro.html?nodo=motion";
-                lastX = acc.x; lastY = acc.y; lastZ = acc.z;
-            }
-        });
-
-        // Login Trap
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault(); window.location.href = "seguridad.html";
+            e.preventDefault(); document.body.style.filter = "invert(1) hue-rotate(90deg)";
+            setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 1500);
         });
     </script>
 </body>
-</html>
+        </html>
