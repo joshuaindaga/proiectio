@@ -15,6 +15,7 @@
         /* --- SLIDERS KINÉTICOS --- */
         /* --- ESTILO DE SLIDERS (VERSIÓN VISIBILIDAD TOTAL) --- */
         /* --- ESTILO DE SLIDERS (VERSIÓN PROPORCIÓN REAL) --- */
+        /* --- ESTILO DE SLIDERS (TEXTO A LA DERECHA) --- */
         .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; touch-action: pan-y; }
         .slider-wrapper:active { cursor: grabbing; }
         
@@ -22,103 +23,66 @@
         
         .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; display: block; pointer-events: auto; }
         
-        /* IMAGEN: Volvemos a lo seguro. Se adapta al ancho, no corta nada. */
-        .slide-item img { 
-            width: 100%; 
-            height: auto; /* Esto es clave: respeta el formato original (16:9) */
-            display: block; 
-            -webkit-user-drag: none; 
-        }
+        .slide-item img { width: 100%; height: auto; display: block; -webkit-user-drag: none; }
 
-        /* OVERLAY: El estilo elegante que te gustó, pero optimizado */
         .label-overlay { 
             position: absolute; 
             bottom: 0; 
             left: 0; 
             width: 100%; 
-            /* Degradado negro suave para que las letras se lean sin tapar la foto con un bloque sólido */
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%); 
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%); 
             color: #fff; 
-            padding: 50px 20px 25px; /* Espacio para el degradado */
-            text-align: left; 
+            padding: 50px 20px 25px; 
+            text-align: right; 
             pointer-events: none; 
         }
-        .label-overlay h3 { color: var(--cian); font-size: 1.4rem; margin-bottom: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .label-overlay p { text-shadow: 0 1px 3px rgba(0,0,0,0.8); font-size: 0.85rem; opacity: 0.9; }
         
-        /* AJUSTE MÓVIL: Textos más pequeños para no estorbar en la imagen */
+        .label-overlay h3 { color: var(--cian); font-size: 1.4rem; margin-bottom: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .label-overlay p { text-shadow: 0 1px 3px rgba(0,0,0,0.8); font-size: 0.85rem; opacity: 0.9; margin-left: auto; max-width: 80%; }
+        
         @media (max-width: 768px) {
-            .label-overlay { padding: 30px 15px 15px; } /* Más compacto */
+            .label-overlay { padding: 40px 15px 15px; }
             .label-overlay h3 { font-size: 1.1rem; }
             .label-overlay p { font-size: 0.7rem; }
-            .dots-container { bottom: 5px; } /* Bajamos los puntos al límite */
+            .dots-container { bottom: 5px; justify-content: flex-end; padding-right: 20px; }
         }
 
-        /* Puntos de navegación */
         .dots-container { position: absolute; bottom: 10px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; pointer-events: auto; }
         .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: 0.3s; border: 1px solid rgba(0,0,0,0.2); }
         .dot.active { background: var(--cian); transform: scale(1.4); border: none; }
+
         .section-title { padding: 60px 20px 20px; text-align: center; }
         .section-title h2 { font-weight: 200; font-size: 2.2rem; letter-spacing: -1px; }
 
         .hero-link { display: block; text-decoration: none; background: var(--gris-claro); }
         .hero-link img { width: 100%; height: auto; display: block; }
 
-        /* --- MITE CHAT --- */
+        /* --- MITE CHAT (REPARADO) --- */
         #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
-        #mite-bubble { width: 65px; height: 65px; cursor: pointer; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.3)); }
-        #chat-window { position: fix/* --- ESTILO DE SLIDERS (VERSIÓN PROPORCIÓN REAL) --- */
-        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; touch-action: pan-y; }
-        .slider-wrapper:active { cursor: grabbing; }
+        #mite-bubble { width: 65px; height: 65px; cursor: pointer; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.3)); transition: 0.3s; }
         
-        .slide-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
-        
-        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; display: block; pointer-events: auto; }
-        
-        /* IMAGEN: Volvemos a lo seguro. Se adapta al ancho, no corta nada. */
-        .slide-item img { 
-            width: 100%; 
-            height: auto; /* Esto es clave: respeta el formato original (16:9) */
-            display: block; 
-            -webkit-user-drag: none; 
-        }
-
-        /* OVERLAY: El estilo elegante que te gustó, pero optimizado */
-        .label-overlay { 
-            position: absolute; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
-            /* Degradado negro suave para que las letras se lean sin tapar la foto con un bloque sólido */
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%); 
-            color: #fff; 
-            padding: 50px 20px 25px; /* Espacio para el degradado */
+        #chat-window { 
+            position: fixed; 
+            bottom: 95px; 
+            right: 20px; 
+            width: 280px; 
+            background: white; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2); 
+            display: none; 
+            flex-direction: column; 
+            overflow: hidden; 
+            border: 1px solid #eee; 
             text-align: left; 
-            pointer-events: none; 
         }
-        .label-overlay h3 { color: var(--cian); font-size: 1.4rem; margin-bottom: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .label-overlay p { text-shadow: 0 1px 3px rgba(0,0,0,0.8); font-size: 0.85rem; opacity: 0.9; }
-        
-        /* AJUSTE MÓVIL: Textos más pequeños para no estorbar en la imagen */
-        @media (max-width: 768px) {
-            .label-overlay { padding: 30px 15px 15px; } /* Más compacto */
-            .label-overlay h3 { font-size: 1.1rem; }
-            .label-overlay p { font-size: 0.7rem; }
-            .dots-container { bottom: 5px; } /* Bajamos los puntos al límite */
-        }
-
-        /* Puntos de navegación */
-        .dots-container { position: absolute; bottom: 10px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 10; pointer-events: auto; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: 0.3s; border: 1px solid rgba(0,0,0,0.2); }
-        .dot.active { background: var(--cian); transform: scale(1.4); border: none;ed; bottom: 95px; right: 20px; width: 280px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; border: 1px solid #eee; text-align: left; }
-        .chat-header { background: var(--cian); color: white; padding: 12px; font-weight: bold; font-size: 0.8rem; display: flex; justify-content: space-between; }
+        .chat-header { background: var(--cian); color: white; padding: 12px; font-weight: bold; font-size: 0.8rem; display: flex; justify-content: space-between; align-items: center; }
         .chat-body { height: 250px; overflow-y: auto; padding: 15px; font-size: 0.8rem; color: #333; }
-        .mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; line-height: 1.4; }
+        .mite-msg { background: #f0f0f5; padding: 8px; border-radius: 12px 12px 12px 0; margin-bottom: 10px; }
         .opt-btn { background: #fff; border: 1px solid var(--cian); color: var(--cian); padding: 5px 10px; border-radius: 10px; font-size: 0.7rem; cursor: pointer; margin: 2px; }
 
-        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; border-top: 1px solid #eee; }
+        /* --- FOOTER (RE-INCLUIDO) --- */
+        footer { padding: 60px 20px; text-align: center; font-size: 0.7rem; color: #aaa; border-top: 1px solid #eee; background: #fff; }
         .secret-link { opacity: 0.05; text-decoration: none; color: #000; cursor: default; font-family: monospace; }
-        .matrix-collapse { filter: invert(1) hue-rotate(90deg) brightness(1.2); transition: 2s; background: #000 !important; }
     </style>
 </head>
 <body id="main-body">
