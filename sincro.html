@@ -90,4 +90,51 @@
                 print("DEVA: Escúchame bien, Agente Tiresias... Marta acaba de ingerir una dosis de 'voltaje químico'. Un engaño con sabor a caramelo.", 'deva', 1500);
                 print("DEVA: Dime el nombre de esa barrita neón para abrirte el búnker, tesoro.", 'deva', 2000);
             } else if (!yaResolvioPlaca) {
-                print("DEVA: El archi
+                print("DEVA: El archivo de Solaris ya es tuyo, pero el rastro de la placa GTGP|CC-2 sigue ahí fuera, mi cielo.", 'deva', 1500);
+                print("DEVA: ¿Lograste descifrarlo con el Módulo CC? Dime el mensaje oculto, corazón.", 'deva', 2000);
+            } else {
+                print("DEVA: Todo está en orden por ahora, mi leyenda. Has descifrado los rastros del primer capítulo. Mantente alerta.");
+                print("<a href='#' class='btn-action'>[BIBLIOTECA FRAGMENTADA]</a>", 'deva', 500);
+            }
+        }, 1500);
+
+        // --- 4. LÓGICA DE RESPUESTA ---
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const rawVal = input.value;
+                const val = rawVal.toLowerCase().trim().replace(/\s+/g, '');
+                print(`> ${rawVal}`, 'system');
+                input.value = '';
+
+                if (pasoActual === "esperando_solaris") {
+                    if (val === 'solaris') {
+                        localStorage.setItem('status_solaris', 'true');
+                        pasoActual = "esperando_placa";
+                        print("DEVA: ¡Eso es, vida mía! Sabía que eras una mente brillante.", 'deva', 500);
+                        print("<a href='#' class='btn-action'>[DESCARGAR FRAGMENTO 7.4]</a>", 'deva', 1000);
+                        setTimeout(() => {
+                            print("DEVA: Pero espera... ¿Viste la placa del vehículo táctico? El código es GTGP|CC-2.", 'deva', 500);
+                            print("<a href='#' class='btn-action'>[MÓDULO CC (PDF)]</a> <a href='#' class='btn-action'>[REGISTRO VIDEO]</a>", 'deva', 1000);
+                            print("DEVA: Usa el Módulo CC, alinea la 'A', desplaza 2 a la IZQUIERDA y dime qué dice, tesoro.", 'deva', 1500);
+                        }, 2000);
+                    } else {
+                        print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque, Tiresias.", 'deva', 500);
+                    }
+                } 
+                else if (pasoActual === "esperando_placa") {
+                    if (val === 'vive') {
+                        localStorage.setItem('status_placa', 'true');
+                        print("DEVA: ¡Uff! ¡Lo lograste! 'VIVE'... un mensaje peligroso en este mundo gris, ¿no crees?", 'deva', 500);
+                        print("<a href='#' class='btn-action'>[FICHA: PERSONAJES]</a>", 'deva', 1000);
+                    } else {
+                        print("DEVA: No, cielo. Alinea la 'A' con la 'A', mueve 2 a la izquierda. ¡Tú puedes!", 'deva', 500);
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('click', () => input.focus());
+        setInterval(() => { if(document.activeElement !== input) input.focus(); }, 1000);
+    </script>
+</body>
+</html>
