@@ -13,20 +13,55 @@
         .logo { font-weight: bold; letter-spacing: 4px; color: var(--texto); font-size: 1rem; }
 
         /* --- SLIDERS KINÉTICOS --- */
-        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; }
+        /* --- ESTILO DE SLIDERS (VERSIÓN VISIBILIDAD TOTAL) --- */
+        .slider-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; overflow: hidden; position: relative; cursor: grab; touch-action: pan-y; }
         .slider-wrapper:active { cursor: grabbing; }
+        
         .slide-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         
-        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; display: block; }
-        .slide-item img { width: 100%; height: auto; display: block; -webkit-user-drag: none; pointer-events: none; }
+        .slide-item { min-width: 100%; position: relative; text-decoration: none; color: inherit; display: block; pointer-events: auto; }
         
-        .label-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: #fff; padding: 50px 20px 30px; text-align: left; }
-        .label-overlay h3 { color: var(--cian); font-size: 1.5rem; margin-bottom: 5px; }
-        
-        .dots-container { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 10; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: 0.3s; }
-        .dot.active { background: var(--cian); transform: scale(1.4); }
+        /* Ajuste de imagen para que no se corte lo importante */
+        .slide-item img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+            -webkit-user-drag: none; 
+            object-fit: cover; /* Asegura que llene el espacio */
+        }
 
+        /* Overlay mejorado: Degradado más suave para ver detalles */
+        .label-overlay { 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            /* Degradado negro suave solo al final */
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%); 
+            color: #fff; 
+            padding: 60px 20px 30px; 
+            text-align: left; 
+            pointer-events: none; /* Permite ver y tocar a través del texto */
+        }
+        .label-overlay h3 { color: var(--cian); font-size: 1.5rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .label-overlay p { text-shadow: 0 1px 3px rgba(0,0,0,0.8); font-size: 0.9rem; }
+        
+        /* AJUSTE ESPECIAL PARA MÓVILES */
+        @media (max-width: 768px) {
+            .slide-item img {
+                height: 65vh; /* Hacemos la imagen MUCHO más alta en el móvil */
+                object-position: center top; /* Enfoca la parte superior/centro */
+            }
+            .label-overlay {
+                padding-bottom: 40px; /* Sube un poco el texto */
+            }
+            .label-overlay h3 { font-size: 1.2rem; }
+        }
+
+        /* Puntos de navegación */
+        .dots-container { position: absolute; bottom: 10px; width: 100%; display: flex; justify-content: center; gap: 10px; z-index: 10; pointer-events: auto; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); cursor: pointer; transition: 0.3s; border: 1px solid rgba(0,0,0,0.2); }
+        .dot.active { background: var(--cian); transform: scale(1.3); border: none; }
         .section-title { padding: 60px 20px 20px; text-align: center; }
         .section-title h2 { font-weight: 200; font-size: 2.2rem; letter-spacing: -1px; }
 
