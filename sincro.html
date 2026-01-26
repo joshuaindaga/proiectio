@@ -3,19 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TERMINAL SINCRO-AR | BIFROST</title>
+    <title>TERMINAL SINCRO-AR | J.A. LEAKS</title>
     <style>
-        :root { --verde: #00ff00; --verde-tenue: #008800; --fondo: #000; }
+        /* --- SECTOR ESTÉTICO: COLORES Y ANIMACIONES --- */
+        :root { --verde: #00ff00; --verde-tenue: #004400; --alerta: #008800; --fondo: #000; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--fondo); color: var(--verde); font-family: 'Courier New', Courier, monospace; padding: 20px; margin: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-        #terminal { flex-grow: 1; overflow-y: auto; font-size: 16px; line-height: 1.5; margin-bottom: 10px; }
+        
+        /* Contenedor de la Terminal */
+        #terminal { flex-grow: 1; overflow-y: auto; font-size: 16px; line-height: 1.5; margin-bottom: 10px; scrollbar-width: none; }
         #terminal::-webkit-scrollbar { display: none; }
-        .input-line { display: flex; align-items: center; border-top: 1px solid #004400; padding-top: 10px; }
+
+        /* Línea de entrada de texto */
+        .input-line { display: flex; align-items: center; border-top: 1px solid var(--verde-tenue); padding-top: 10px; }
         #user-input { background: transparent; border: none; color: var(--verde); outline: none; width: 100%; font-size: 16px; font-family: inherit; padding-left: 8px; }
+        
+        /* Clases de texto dinámico */
         .linea { margin-bottom: 12px; }
-        .system-text { color: var(--verde-tenue); font-style: italic; }
+        .system-text { color: var(--alerta); font-style: italic; font-size: 0.8rem; }
         .deva-text { color: var(--verde); }
-        .btn-action { display: inline-block; margin: 5px 5px 5px 0; padding: 8px 15px; border: 1px solid var(--verde); color: var(--verde); text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
+        .leaks-alert { color: var(--verde); border: 1px dashed var(--verde); padding: 5px; display: inline-block; font-weight: bold; animation: pulse 2s infinite; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* Estilo de Botones de Acción (Contrabando) */
+        .btn-action { 
+            display: inline-block; margin: 8px 8px 8px 0; padding: 10px 18px; 
+            border: 1px solid var(--verde); color: var(--verde); text-decoration: none; 
+            font-weight: bold; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; 
+        }
         .btn-action:hover { background: var(--verde); color: #000; }
     </style>
 </head>
@@ -33,103 +49,147 @@
         const history = document.getElementById('history');
         const input = document.getElementById('user-input');
 
-        // --- 1. MEMORIA Y ESTADO ---
-        let statusSolaris = localStorage.getItem('status_solaris') === 'true';
-        let pasoActual = statusSolaris ? "esperando_placa" : "esperando_solaris";
+        /* 
+           =========================================
+           SECTOR 1: MEMORIA PERSISTENTE (LOCALSTORAGE)
+           Aquí DEVA consulta qué sabe del usuario.
+           =========================================
+        */
+        const yaResolvioSolaris = localStorage.getItem('status_solaris') === 'true';
+        const yaResolvioPlaca = localStorage.getItem('status_placa') === 'true';
+        let pasoActual = yaResolvioSolaris ? "esperando_placa" : "esperando_solaris";
 
+
+        /* 
+           =========================================
+           SECTOR 2: UTILIDADES DE INTERFAZ
+           Funciones para imprimir texto en pantalla.
+           =========================================
+        */
         function print(text, type = 'deva', delay = 0) {
             setTimeout(() => { 
                 const line = document.createElement('div');
-                line.className = 'linea ' + (type === 'system' ? 'system-text' : 'deva-text');
+                line.className = 'linea ' + (type === 'system' ? 'system-text' : '');
                 line.innerHTML = text; 
                 history.appendChild(line); 
                 history.scrollTop = history.scrollHeight; 
             }, delay);
         }
 
-        // --- 2. DETECCIÓN DE HARDWARE (SIN BLOQUEOS) ---
-        let batMsg = "la energía justa";
-        let osInfo = "tu dispositivo";
-        const ua = navigator.userAgent;
-        if (ua.includes("Android")) osInfo = "tu Android";
-        else if (ua.includes("iPhone")) osInfo = "tu joyita de Apple";
 
-        // Intento de batería silencioso (No detiene el script)
-        if (navigator.getBattery) {
-            navigator.getBattery().then(bat => {
-                batMsg = Math.round(bat.level * 100) + "% de energía";
-            }).catch(e => console.log(e));
+        /* 
+           =========================================
+           SECTOR 3: ESCANEO DE METADATOS (INTRUSIÓN)
+           DEVA detecta batería, sistema y hora.
+           =========================================
+        */
+        async function iniciarTerminal() {
+            print("[SISTEMA: CONEXIÓN BIFROST ESTABLECIDA]", 'system', 100);
+            print("<span class='leaks-alert'>[J.A. LEAKS // INTRUSIÓN ANÓNIMA DETECTADA]</span>", 'system', 500);
+            print("[FUENTE: DESCONOCIDA // CIFRADO NIVEL 7-OMEGA]", 'system', 800);
+            
+            let batteryMsg = "la energía justa";
+            let osInfo = "tu dispositivo";
+
+            // Detección de Batería
+            if (navigator.getBattery) {
+                try {
+                    const battery = await navigator.getBattery();
+                    batteryMsg = `un ${Math.round(battery.level * 100)}% de energía`;
+                } catch (e) {}
+            }
+            // Detección de Sistema Operativo
+            const ua = navigator.userAgent;
+            if (ua.includes("Android")) osInfo = "tu Android";
+            else if (ua.includes("iPhone")) osInfo = "tu dispositivo Apple";
+
+
+            /* 
+               =========================================
+               SECTOR 4: FLUJO NARRATIVO (DIÁLOGOS)
+               Basado en el progreso guardado en memoria.
+               =========================================
+            */
+            setTimeout(() => {
+                const saludos = [
+                    "DEVA: ¡Bingo! Mira quién encontró la rendija.",
+                    "DEVA: ¿Todavía con pulso, mi vida? Me tenías con el alma en un hilo.",
+                    "DEVA: Vaya, vaya... parece que alguien aquí tiene un alma rebelde.",
+                    "DEVA: ¡Uff! Siento tu rastro desde aquí. Sabía que volverías."
+                ];
+                print(saludos[Math.floor(Math.random() * saludos.length)]);
+                print(`DEVA: Veo que te conectas desde ${osInfo} y tienes ${batteryMsg}... lo justo para una cháchara rápida, mi cielo.`);
+                
+                print("DEVA: Escúchame bien, Tiresias. Alguien está arriesgando su existencia para filtrar estos datos desde las sombras. No sé quién es, pero sabe hackear el sistema mejor que yo.");
+
+                // Verificamos el estado del usuario para saber qué preguntarle
+                if (!yaResolvioSolaris) {
+                    print("DEVA: Marta acaba de ingerir una dosis de 'voltaje químico'. Dime el nombre de esa barrita neón para abrirte el primer paquete de contrabando, tesoro.");
+                } else if (!yaResolvioPlaca) {
+                    print("DEVA: El primer secreto ya es tuyo, pero J.A. Leaks ha dejado otro rastro. ¿Viste la placa GTGP|CC-2?", 'deva', 500);
+                    print("DEVA: Dime el mensaje oculto si quieres las fichas de Marta y Leo, mi vida.");
+                } else {
+                    print("DEVA: Todo en orden, leyenda. Has descifrado los rastros del primer capítulo. El canal se mantendrá encriptado hasta el próximo nodo.");
+                    print("<a href='#' class='btn-action'>[ARCHIVO DE CONTRABANDO]</a>");
+                }
+            }, 1200);
         }
 
-        // --- 3. SECUENCIA DE DIÁLOGO ---
-        print("[SISTEMA: CONEXIÓN BIFROST ESTABLECIDA]", 'system', 100);
+        iniciarTerminal();
 
-        setTimeout(() => {
-            const saludos = [
-                "DEVA: ¡Bingo! Mira quién encontró la rendija.",
-                "DEVA: ¿Todavía con pulso, mi vida? Me tenías preocupada.",
-                "DEVA: Vaya, vaya... parece que alguien aquí tiene un alma rebelde.",
-                "DEVA: ¡Uff! Siento tu rastro desde aquí. Sabía que volverías."
-            ];
-            print(saludos[Math.floor(Math.random() * saludos.length)]);
-            
-            const hora = new Date().getHours();
-            let msgHora = "Me gusta tener tu atención, corazón.";
-            if (hora < 6) msgHora = "¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?";
-            if (hora > 22) msgHora = "Es tarde, tesoro. El mundo real ya se durmió, pero nosotros no.";
 
-            // Pequeño retraso para dar tiempo a la batería (si responde rápido)
-            setTimeout(() => {
-                print(`DEVA: Veo que te conectas desde ${osInfo} y tienes ${batMsg}... lo justo para una cháchara rápida, mi cielo.`);
-                print(`DEVA: ${msgHora}`);
-
-                if (!statusSolaris) {
-                    print("DEVA: Escúchame bien, Agente Tiresias... Marta acaba de ingerir una dosis de 'voltaje químico'. Un engaño con sabor a caramelo.");
-                    print("DEVA: Dime el nombre de esa barrita neón para abrirte el búnker, tesoro.");
-                } else {
-                    print("DEVA: El archivo de Solaris ya es tuyo, mi vida. Pero el rastro de la placa GTGP|CC-2 sigue ahí fuera.");
-                    print("DEVA: ¿Lograste descifrarlo con el Módulo CC? Dime el mensaje oculto, corazón.");
-                }
-            }, 500);
-        }, 800);
-
-        // --- 4. LÓGICA DE RESPUESTA ---
+        /* 
+           =========================================
+           SECTOR 5: PROCESADOR DE COMANDOS (LÓGICA)
+           Aquí se validan las contraseñas del usuario.
+           =========================================
+        */
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const rawVal = input.value;
-                const val = rawVal.toLowerCase().trim().replace(/\s+/g, '');
+                const val = rawVal.toLowerCase().trim().replace(/\s+/g, ''); // Limpieza de espacios y mayúsculas
                 print(`> ${rawVal}`, 'system');
                 input.value = '';
 
+                // LÓGICA DESAFÍO 1: SOLARIS
                 if (pasoActual === "esperando_solaris") {
                     if (val === 'solaris') {
-                        localStorage.setItem('status_solaris', 'true');
+                        localStorage.setItem('status_solaris', 'true'); // Guardamos progreso
                         pasoActual = "esperando_placa";
-                        print("DEVA: ¡Eso es, vida mía! Sabía que eras una mente brillante.", 'deva', 500);
-                        print("<a href='#' class='btn-action'>[DESCARGAR FRAGMENTO 7.4]</a>", 'deva', 1000);
+                        print("DEVA: ¡Eso es, vida mía! Quienquiera que nos esté enviando esto estaría orgulloso de ti.", 'deva', 500);
+                        print("<a href='#' class='btn-action'>[PAQUETE DE CONTRABANDO 7.4]</a>", 'deva', 1000);
+                        
                         setTimeout(() => {
-                            print("DEVA: Pero espera... ¿Viste la placa del vehículo táctico? El código es GTGP|CC-2.", 'deva', 500);
+                            print("DEVA: Espera... detecto otra interferencia. ¿Viste la placa del vehículo táctico? El código es GTGP|CC-2.", 'deva', 500);
                             print("<a href='#' class='btn-action'>[MÓDULO CC (PDF)]</a> <a href='#' class='btn-action'>[REGISTRO VIDEO]</a>", 'deva', 1000);
                             print("DEVA: Usa el Módulo CC, alinea en la 'A', desplaza 2 a la IZQUIERDA y dime qué dice, tesoro.", 'deva', 1500);
-                        }, 2000);
+                        }, 2500);
                     } else {
-                        print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el empaque, Tiresias.", 'deva', 500);
+                        print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el envoltorio en el capítulo 1.", 'deva', 500);
                     }
                 } 
+                // LÓGICA DESAFÍO 2: LA PLACA
                 else if (pasoActual === "esperando_placa") {
                     if (val === 'vive') {
-                        localStorage.setItem('status_placa', 'true');
-                        print("DEVA: ¡Uff! ¡Lo lograste! 'VIVE'... un mensaje peligroso en este mundo gris, ¿no crees?", 'deva', 500);
-                        print("<a href='#' class='btn-action'>[FICHA: PERSONAJES]</a>", 'deva', 1000);
+                        localStorage.setItem('status_placa', 'true'); // Guardamos progreso final
+                        print("DEVA: ¡Uff! Me has dejado sin aliento, Tiresias. ¡Lo lograste!", 'deva', 500);
+                        print("DEVA: 'VIVE'... J.A. Leaks sabe cómo elegir sus mensajes. Aquí tienes tu recompensa, mi vida:");
+                        print("<a href='#' class='btn-action'>[FICHA: MARTA Y LEO]</a>", 'deva', 1000);
+                        print("DEVA: Debo cerrar este canal ahora, corazón. Unidades de Respuesta Rápida detectadas. Cuídate mucho.", 'deva', 2000);
+                        
+                        // BLOQUEO DEL CANAL POR SEGURIDAD
+                        input.disabled = true;
+                        input.placeholder = "CANAL ENCRIPTADO POR SEGURIDAD";
                     } else {
-                        print("DEVA: No, mi cielo. Alinea la 'A' con la 'A', mueve 2 a la IZQUIERDA. ¡Tú puedes!", 'deva', 500);
+                        print("DEVA: No, cielo. Alinea la 'A', mueve 2 a la IZQUIERDA. ¡Tú puedes!", 'deva', 500);
                     }
                 }
             }
         });
 
+        // Forzar el foco en el teclado para móviles
         document.addEventListener('click', () => input.focus());
-        setInterval(() => { if(document.activeElement !== input) input.focus(); }, 1000);
+        setInterval(() => { if(!input.disabled && document.activeElement !== input) input.focus(); }, 1000);
     </script>
 </body>
 </html>
