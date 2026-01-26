@@ -5,20 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TERMINAL SINCRO-AR | J.A. LEAKS</title>
     <style>
-        /* --- SECTOR 1: ESTÉTICA --- */
+        /* =========================================
+           SECTOR 1: ESTÉTICA DE LA TERMINAL
+           ========================================= */
         :root { --verde: #00ff00; --verde-tenue: #004400; --alerta: #008800; --fondo: #000; }
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { background: var(--fondo); color: var(--verde); font-family: 'Courier New', Courier, monospace; padding: 20px; margin: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        
         #terminal { flex-grow: 1; overflow-y: auto; font-size: 16px; line-height: 1.5; margin-bottom: 10px; scrollbar-width: none; }
         #terminal::-webkit-scrollbar { display: none; }
+
         .input-line { display: flex; align-items: center; border-top: 1px solid var(--verde-tenue); padding-top: 10px; }
         #user-input { background: transparent; border: none; color: var(--verde); outline: none; width: 100%; font-size: 16px; font-family: inherit; padding-left: 8px; }
+        
         .linea { margin-bottom: 12px; }
         .system-text { color: var(--alerta); font-style: italic; font-size: 0.8rem; }
         .deva-text { color: var(--verde); }
         .leaks-alert { color: var(--verde); border: 1px dashed var(--verde); padding: 5px; display: inline-block; font-weight: bold; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-        .btn-action { display: inline-block; margin: 8px 8px 8px 0; padding: 10px 18px; border: 1px solid var(--verde); color: var(--verde); text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; }
+
+        /* Estilo de Botones de Contrabando (Interacción) */
+        .btn-action { 
+            display: inline-block; margin: 8px 8px 8px 0; padding: 10px 18px; 
+            border: 1px solid var(--verde); color: var(--verde); text-decoration: none; 
+            font-weight: bold; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; 
+        }
         .btn-action:hover { background: var(--verde); color: #000; cursor: pointer; }
     </style>
 </head>
@@ -36,11 +47,16 @@
         const history = document.getElementById('history');
         const input = document.getElementById('user-input');
 
-        /* SECTOR 2: MEMORIA PERSISTENTE */
+        /* =========================================
+           SECTOR 2: MEMORIA PERSISTENTE (LOCALSTORAGE)
+           ========================================= */
         const yaResolvioSolaris = localStorage.getItem('status_solaris') === 'true';
         const yaResolvioPlaca = localStorage.getItem('status_placa') === 'true';
         let pasoActual = yaResolvioSolaris ? "esperando_placa" : "esperando_solaris";
 
+        /* =========================================
+           SECTOR 3: UTILIDADES DE INTERFAZ
+           ========================================= */
         function print(text, type = 'deva', delay = 0) {
             setTimeout(() => { 
                 const line = document.createElement('div');
@@ -51,11 +67,14 @@
             }, delay);
         }
 
-        /* SECTOR 3: METADATOS Y BIENVENIDA */
+        /* =========================================
+           SECTOR 4: ESCANEO DE METADATOS Y BIENVENIDA
+           ========================================= */
         async function iniciarTerminal() {
             print("[SISTEMA: CONEXIÓN BIFROST ESTABLECIDA]", 'system', 100);
             print("<span class='leaks-alert'>[J.A. LEAKS // INTRUSIÓN ANÓNIMA DETECTADA]</span>", 'system', 500);
             
+            // Detección de Batería
             let batteryMsg = "la energía justa";
             if (navigator.getBattery) {
                 try {
@@ -63,34 +82,46 @@
                     batteryMsg = `un ${Math.round(battery.level * 100)}% de energía`;
                 } catch (e) {}
             }
+
+            // Detección de Sistema Operativo
             const ua = navigator.userAgent;
             let osInfo = "tu dispositivo";
             if (ua.includes("Android")) osInfo = "tu Android";
             else if (ua.includes("iPhone")) osInfo = "tu joyita de Apple";
 
+            // Lógica de Hora
+            const hora = new Date().getHours();
+            let msgHora = "Me gusta tener tu atención, corazón.";
+            if (hora < 6) msgHora = "¿Qué haces despierto a estas horas, vida mía? ¿Humania no te deja dormir?";
+            if (hora > 22) msgHora = "Es tarde, tesoro. El mundo real ya se durmió, pero nosotros no.";
+
+            // Saludos Espontáneos
+            const saludos = [
+                "DEVA: ¡Bingo! Mira quién encontró la rendija.",
+                "DEVA: ¿Todavía con pulso, mi vida? Me tenías con el alma en un hilo.",
+                "DEVA: Vaya, vaya... parece que alguien aquí tiene un alma rebelde.",
+                "DEVA: ¡Uff! Siento tu rastro desde aquí. Sabía que volverías."
+            ];
+
             setTimeout(() => {
-                const saludos = [
-                    "DEVA: ¡Bingo! Mira quién encontró la rendija.",
-                    "DEVA: ¿Todavía con pulso, mi vida? Me tenías con el alma en un hilo.",
-                    "DEVA: Vaya, vaya... parece que alguien aquí tiene un alma rebelde.",
-                    "DEVA: ¡Uff! Siento tu rastro desde aquí. Sabía que volverías."
-                ];
                 print(saludos[Math.floor(Math.random() * saludos.length)]);
                 print(`DEVA: Veo que te conectas desde ${osInfo} y tienes ${batteryMsg}... lo justo para una cháchara rápida, mi cielo.`);
+                print(`DEVA: ${msgHora}`);
                 
                 print("DEVA: Alguien está arriesgando su existencia para filtrar estos datos desde las sombras de Humania. No sé quién es, pero sabe hackear el sistema mejor que yo.");
 
+                // FLUJO BASADO EN MEMORIA
                 if (!yaResolvioSolaris) {
                     print("DEVA: Marta acaba de ingerir una dosis de 'voltaje químico'. Dime el nombre de esa barrita neón para abrirte el primer paquete de contrabando, tesoro.");
                 } else if (!yaResolvioPlaca) {
                     print("DEVA: El archivo de Solaris ya es tuyo, pero J.A. Leaks ha dejado otro rastro. ¿Viste la placa GTGP|CC-2?", 'deva', 500);
                     print("DEVA: Necesitas el Módulo CC para descifrarlo. Aquí tienes la herramienta y un registro del Viejo Mundo, mi vida.");
-                    // --- ENLACE VERSIÓN IMAGEN SIN BLOQUEO ---
-                    print("<a href='https://humania-nexo.github.io/proiectio/herramientas/modulocc.png' target='_blank' class='btn-action'>[VER MÓDULO CC]</a> <a href='#' class='btn-action'>[REGISTRO VIDEO]</a>");
+                    // --- ENLACES DE HERRAMIENTAS ---
+                    print("<a href='https://humania-nexo.github.io/proiectio/herramientas/modulocc.png' download class='btn-action'>[DESCARGAR MÓDULO CC]</a> <a href='#' class='btn-action'>[REGISTRO VIDEO]</a>");
                     print("DEVA: Si ya descifraste el mensaje oculto, escríbelo aquí abajo, tesoro.");
                 } else {
                     print("DEVA: Todo en orden, mi leyenda. El canal se mantendrá encriptado hasta el próximo nodo.");
-                    print("<a href='#' class='btn-action'>[ARCHIVO DE CONTRABANDO]</a>");
+                    print("<a href='#' class='btn-action'>[BIBLIOTECA DE CONTRABANDO]</a>");
                     input.disabled = true;
                     input.placeholder = "CANAL PROTEGIDO";
                 }
@@ -99,43 +130,50 @@
 
         iniciarTerminal();
 
-        /* SECTOR 4: LÓGICA DE VALIDACIÓN */
+        /* =========================================
+           SECTOR 5: LÓGICA DE VALIDACIÓN (MODULAR)
+           ========================================= */
         input.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const rawVal = input.value;
-                const val = rawVal.toLowerCase().trim().replace(/\s+/g, '');
+                const val = rawVal.toLowerCase().trim().replace(/\s+/g, ''); // Limpieza total
                 print(`> ${rawVal}`, 'system');
                 input.value = '';
 
+                // DESAFÍO 1: SOLARIS
                 if (pasoActual === "esperando_solaris") {
                     if (val === 'solaris') {
                         localStorage.setItem('status_solaris', 'true');
                         pasoActual = "esperando_placa";
                         print("DEVA: ¡Eso es, vida mía! Sabía que eras una mente brillante.", 'deva', 500);
                         print("DEVA: Aquí tienes el Fragmento 7.4 robado a Vance:");
-                        print("<a href='#' target='_blank' class='btn-action'>[PAQUETE CONTRABANDO 7.4]</a>", 'deva', 1000);
+                        // --- ENLACE RECOMPENSA 1 ---
+                        print("<a href='#' class='btn-action'>[PAQUETE CONTRABANDO 7.4]</a>", 'deva', 1000);
                         
                         setTimeout(() => {
                             print("DEVA: Pero espera... detecto otra interferencia. ¿Viste la placa del vehículo táctico? El código es GTGP|CC-2.", 'deva', 500);
-                            print("DEVA: Necesitas el Módulo CC para descifrarlo. Te dejo la herramienta y el registro visual, tesoro.");
-                            print("<a href='https://humania-nexo.github.io/proiectio/herramientas/modulocc.png' target='_blank' class='btn-action'>[VER MÓDULO CC]</a> <a href='#' target='_blank' class='btn-action'>[REGISTRO VIDEO]</a>", 'deva', 1000);
+                            print("DEVA: Necesitas el Módulo CC para descifrarlo. Te dejo la herramienta y un video de un usuario del Viejo Mundo, tesoro.");
+                            // --- ENLACES DE HERRAMIENTAS ---
+                            print("<a href='https://humania-nexo.github.io/proiectio/herramientas/modulocc.jpg' download class='btn-action'>[MÓDULO CC (IMAGEN)]</a> <a href='#' class='btn-action'>[REGISTRO VIDEO]</a>", 'deva', 1000);
                             print("DEVA: Si logras encontrar el mensaje oculto, dime qué dice, mi vida.", 'deva', 1500);
                         }, 2500);
                     } else {
                         print("DEVA: Uy, fallo de sincronía, tesoro. Revisa bien el envoltorio en el capítulo 1.", 'deva', 500);
                     }
                 } 
+                // DESAFÍO 2: LA PLACA (CC-2)
                 else if (pasoActual === "esperando_placa") {
                     if (val === 'vive') {
                         localStorage.setItem('status_placa', 'true');
                         print("DEVA: ¡Uff! Me has dejado sin aliento, Tiresias. ¡Lo lograste!", 'deva', 500);
-                        print("DEVA: 'VIVE'... un recordatorio peligroso. Aquí tienes tu recompensa final, mi vida:");
-                        print("<a href='#' target='_blank' class='btn-action'>[FICHA: MARTA Y LEO]</a>", 'deva', 1000);
+                        print("DEVA: 'VIVE'... un recordatorio peligroso en este mundo gris. Aquí tienes tu recompensa, mi vida:");
+                        // --- ENLACE RECOMPENSA FINAL ---
+                        print("<a href='#' class='btn-action'>[FICHA: MARTA Y LEO]</a>", 'deva', 1000);
                         
                         setTimeout(() => {
                             print("DEVA: Debo cerrar este canal ahora, corazón. Unidades de Respuesta Rápida detectadas en tu sector. Cuídate mucho.", 'deva', 500);
                             input.disabled = true;
-                            input.placeholder = "CANAL ENCRIPTADO";
+                            input.placeholder = "CANAL ENCRIPTADO POR SEGURIDAD";
                         }, 2000);
                     } else {
                         print("DEVA: No, cielo. Alinea la 'A' con la 'A' en tu Módulo CC, mueve 2 a la IZQUIERDA y vuelve a intentarlo.", 'deva', 500);
@@ -144,6 +182,7 @@
             }
         });
 
+        // Asegurar que el teclado se abra al tocar
         document.addEventListener('click', () => { if(!input.disabled) input.focus(); });
         setInterval(() => { if(!input.disabled && document.activeElement !== input) input.focus(); }, 1000);
     </script>
