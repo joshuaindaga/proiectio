@@ -2,51 +2,172 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PROIECTIO | El Futuro del Sueño</title>
-    <!-- VINCULACIÓN AL CEREBRO ESTÉTICO -->
+    <!-- CEREBRO DE ESTILOS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="main-body">
 
-    <!-- INYECCIÓN DEL HEADER -->
+    <!-- 0. HEADER -->
     <div id="header-placeholder"></div>
 
-    <!-- El resto del contenido -->
-    <section class="hero-link">
-        <img src="multimedia/hero.jpg">
-        <div style="padding: 40px 20px; text-align: center;">
+    <!-- 1. HERO -->
+    <section class="parallax-section" style="background-image: url('multimedia/hero.png');">
+        <div class="overlay-text">
             <h1>Un Mañana Sin Sombras</h1>
+            <p style="color:var(--cian); letter-spacing: 2px; font-weight:bold;">TECNOLOGÍA NEURONAL NIVEL 7</p>
         </div>
     </section>
 
-    <!-- SLIDER SUBMUNDOS -->
-    <div class="section-title">
-        <h2>Ecosistemas de Inmersión</h2>
-    </div>
+    <!-- 2. CATÁLOGO -->
+    <div class="section-title"><h2>Ecosistemas de Inmersión</h2></div>
     <div class="slider-wrapper" id="wrapper-catalog">
         <div class="slide-track" id="catalog-track">
-            <!-- (Aquí van todos tus <a> con las imágenes de los submundos) -->
+            <!-- Items (Asegúrate de que las rutas sean correctas) -->
+            <a href="olympus.html" class="slide-item"><img src="multimedia/olympus.png"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial.</p></div></a>
+            <a href="arcadia.html" class="slide-item"><img src="multimedia/arcadia.png"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></a>
+            <a href="beso.html" class="slide-item"><img src="multimedia/beso.png"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div></a>
+            <a href="neon.html" class="slide-item"><img src="multimedia/neon.png"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Placer bajo vigilancia.</p></div></a>
+            <a href="chronos.html" class="slide-item"><img src="multimedia/chronos.png"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></a>
+            <a href="coliseo.html" class="slide-item"><img src="multimedia/coliseo.png"><div class="label-overlay"><h3>Coliseo Etérico</h3><p>Forja tu leyenda.</p></div></a>
         </div>
         <div class="dots-container" id="catalog-dots"></div>
     </div>
-    
-    <!-- (Y así con las demás secciones: Nutrición, FE, REM, Mite y Footer) -->
 
+    <!-- 3. CICLO DE RECARGA -->
+    <div class="section-title"><h2>Ciclo de Recarga</h2></div>
+    <div class="slider-wrapper" id="wrapper-nutri">
+        <div class="slide-track" id="nutri-track">
+            <a href="solaris.html" class="slide-item"><img src="multimedia/solaris-web.png"><div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro.</p></div></a>
+            <a href="velvet.html" class="slide-item"><img src="multimedia/velvet-web.png"><div class="label-overlay"><h3>FASE NOCTURNA: VELVET</h3><p>Reinicio profundo.</p></div></a>
+        </div>
+        <div class="dots-container" id="nutri-dots"></div>
+    </div>
+
+    <!-- 4. MERCADO DE FE & S.P.N. -->
+    <div class="section-title"><h2>Adquisición de FE</h2><p>Monetice su existencia.</p></div>
+    <div class="fe-container">
+        <div class="fe-card">
+            <div class="fe-price">500 <small>FE</small></div>
+            <p>Acceso estándar.</p>
+            <button class="btn-buy" onclick="iniciarSPN()">RECARGAR FE</button>
+        </div>
+        <div class="fe-card premium">
+            <div class="fe-price">2,500 <small>FE</small></div>
+            <p>Estatus Premium.</p>
+            <button class="btn-buy" style="background:var(--cian); color:#fff;" onclick="iniciarSPN()">RECARGAR FE</button>
+        </div>
+    </div>
+
+    <!-- 5. MECANICA SUEÑO -->
+    <section class="parallax-section" style="background-image: url('multimedia/sueño.png'); margin-top: 60px;">
+        <div class="overlay-text">
+            <h2>Sincronía REM</h2>
+            <button class="btn-buy" style="margin-top:20px; background:#000; color:#fff;" onclick="window.location.href='seguridad.html'">CONECTAR AHORA</button>
+        </div>
+    </section>
+
+    <!-- MODAL S.P.N. (SISTEMA DE PAGO) -->
+    <div id="spn-overlay" class="spn-overlay">
+        <div class="spn-box">
+            <div id="spn-loader">
+                <div class="pulse-ring"></div>
+                <h3 style="color:var(--cian)">S.P.N. ACTIVO</h3>
+                <p id="spn-status" style="font-family:monospace; color:#666;">Buscando firma biométrica...</p>
+            </div>
+            <div id="spn-error" style="display:none;">
+                <h3 style="color:red">FALLO DE ENLACE</h3>
+                <p style="font-size:0.8rem; margin:15px 0;">ERROR CRÍTICO [BIO-404]: No se detecta chip CNB-3. Transacción rechazada.</p>
+                <button class="btn-buy" onclick="document.getElementById('spn-overlay').style.display='none'">CERRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER & LINK MATRIX -->
+    <footer>
+        <p>&copy; 202X HUMANIA GLOBAL SYSTEMS.</p>
+        <a href="#" id="matrix-trigger" class="secret-link">Error_v.0.8</a>
+    </footer>
+
+    <!-- INVOCACIÓN DE MITE -->
+    <script src="mite.js"></script>
+
+    <!-- SCRIPTS INTERNOS (SPN + MOTION + SLIDERS) -->
     <script>
-        // --- INYECTOR DE COMPONENTES ---
-        fetch('header.html')
-            .then(res => res.text())
-            .then(data => document.getElementById('header-placeholder').innerHTML = data);
-        
-        // --- MOTOR KINÉTICO (SIN CAMBIOS) ---
-        // (Aquí va el script de los sliders que ya te pasé)
+        // Cargar Header
+        fetch('header.html').then(r => r.text()).then(d => document.getElementById('header-placeholder').innerHTML = d);
 
-        // --- CHAT DE MITE (SIN CAMBIOS) ---
-        // (Aquí va el script de Mite)
+        // Sliders Kinéticos
+        function setupSlider(wrapperId, trackId, dotsId, count) {
+            const wrapper = document.getElementById(wrapperId), track = document.getElementById(trackId), dotsContainer = document.getElementById(dotsId);
+            let index = 0, startX = 0, currentTranslate = 0, prevTranslate = 0, isDragging = false, animationID;
 
-        // --- ENTRADA MATRIX (SIN CAMBIOS) ---
-        // (Aquí va el script del enlace secreto)
+            for(let i=0; i<count; i++) {
+                const dot = document.createElement('div'); dot.className = 'dot' + (i===0?' active':'');
+                dot.onclick = () => { index = i; setPosition(); };
+                dotsContainer.appendChild(dot);
+            }
+
+            wrapper.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; animationID = requestAnimationFrame(animation); });
+            wrapper.addEventListener('touchmove', e => { if(isDragging) currentTranslate = prevTranslate + e.touches[0].clientX - startX; });
+            wrapper.addEventListener('touchend', () => { isDragging = false; cancelAnimationFrame(animationID); const movedBy = currentTranslate - prevTranslate; if(movedBy < -100 && index < count-1) index++; if(movedBy > 100 && index > 0) index--; setPosition(); });
+            
+            function animation() { track.style.transform = `translateX(${currentTranslate}px)`; if(isDragging) requestAnimationFrame(animation); }
+            function setPosition() { currentTranslate = index * -wrapper.offsetWidth; prevTranslate = currentTranslate; track.style.transform = `translateX(${currentTranslate}px)`; const dots = dotsContainer.querySelectorAll('.dot'); dots.forEach((d, i) => d.className = 'dot' + (i===index?' active':'')); }
+            
+            setInterval(() => { if(!isDragging) { index = (index+1)%count; setPosition(); } }, 6000);
+        }
+        window.onload = () => { setupSlider('wrapper-catalog', 'catalog-track', 'catalog-dots', 6); setupSlider('wrapper-nutri', 'nutri-track', 'nutri-dots', 2); };
+
+        // LÓGICA S.P.N. (PAGO)
+        function iniciarSPN() {
+            const overlay = document.getElementById('spn-overlay');
+            const loader = document.getElementById('spn-loader');
+            const error = document.getElementById('spn-error');
+            const status = document.getElementById('spn-status');
+            
+            overlay.style.display = 'flex';
+            loader.style.display = 'block';
+            error.style.display = 'none';
+            status.textContent = "Estableciendo enlace...";
+
+            setTimeout(() => { status.textContent = "Validando saldo en glándula pineal..."; }, 1500);
+            
+            setTimeout(() => {
+                loader.style.display = 'none';
+                error.style.display = 'block';
+                // Mite se burla llamando a su función global
+                if (typeof window.miteResponder === "function") {
+                    window.miteResponder('eter'); 
+                }
+            }, 3000);
+        }
+
+        // PUERTA SECRETA: MATRIX + MOVIMIENTO
+        // Destino: nodo=gemelas
+        const irATerminal = () => {
+            document.body.classList.add('matrix-collapse');
+            setTimeout(() => { window.location.href = "sincro.html?nodo=gemelas"; }, 2000);
+        };
+
+        // Click en footer
+        document.getElementById('matrix-trigger').addEventListener('click', e => {
+            e.preventDefault(); irATerminal();
+        });
+
+        // Agitar teléfono
+        let lastX, lastY, lastZ, lastUpdate = 0;
+        window.addEventListener('devicemotion', function(e) {
+            let acc = e.accelerationIncludingGravity;
+            let now = new Date().getTime();
+            if ((now - lastUpdate) > 100) {
+                let diff = now - lastUpdate; lastUpdate = now;
+                let speed = Math.abs(acc.x + acc.y + acc.z - lastX - lastY - lastZ) / diff * 10000;
+                if (speed > 2000) irATerminal();
+                lastX = acc.x; lastY = acc.y; lastZ = acc.z;
+            }
+        });
     </script>
 </body>
 </html>
