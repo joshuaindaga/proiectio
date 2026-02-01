@@ -8,9 +8,20 @@ document.addEventListener("DOMContentLoaded", function() {
     const style = document.createElement('style');
     style.innerHTML = `
         #mite-widget { position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: 'Helvetica Neue', Arial, sans-serif; }
-        #mite-bubble { width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s; filter: drop-shadow(0 5px 15px rgba(0,195,255,0.4)); }
-        #mite-bubble:hover { transform: scale(1.1) rotate(5deg); }
-        
+        #mite-bubble { 
+            width: 70px; 
+            height: 70px; 
+            cursor: pointer; 
+            transition: transform 0.3s; 
+            filter: drop-shadow(0 5px 15px rgba(0,195,255,0.4)); 
+            animation: breathingMite 4s ease-in-out infinite;
+        }
+
+        @keyframes breathingMite {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.05); filter: drop-shadow(0 10px 25px rgba(0,195,255,0.7)); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
         #chat-window { 
             position: fixed; bottom: 100px; right: 20px; width: 300px; 
             background: white; border-radius: 20px; 
