@@ -4,75 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PROIECTIO | El Futuro del Sueño</title>
-    <!-- CEREBRO DE ESTILOS -->
+    <!-- CEREBRO DE ESTILOS MAESTROS -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- ESTILOS ESPECÍFICOS PARA EL EVENTO (Juegos Etéricos) -->
+    <!-- ESTILOS ESPECÍFICOS PARA EL EVENTO -->
     <style>
-        .event-banner { position: relative; padding: 80px 20px; text-align: center; color: white; overflow: hidden; margin-top: 40px; box-shadow: inset 0 0 100px #000; }
-        .event-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('multimedia/evento-live.jpeg') center/cover; z-index: -2; filter: blur(2px); }
-        .event-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: -1; }
-        .live-badge { font-size: 0.7rem; color: #00c3ff; border: 1px solid #00c3ff; display: inline-block; padding: 4px 12px; border-radius: 20px; margin-bottom: 20px; font-weight: bold; letter-spacing: 2px; animation: pulse 2s infinite; }
-        .countdown { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-        .time-box { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; min-width: 70px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
-        .btn-event { padding: 15px 50px; background: linear-gradient(90deg, #00c3ff, #005f73); color: white; border: none; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 20px rgba(0,195,255,0.4); transition: 0.3s; margin-top: 20px; }
-        .btn-event:hover { transform: scale(1.05); box-shadow: 0 0 40px rgba(0,195,255,0.6); }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        
-        /* Ajuste específico para el evento */
         .event-section { position: relative; width: 100%; height: 85vh; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; margin-top: 40px; background: #000; }
-        .event-section .event-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('multimedia/evento-live.jpeg') center top / cover no-repeat; z-index: 0; }
+        .event-section .event-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('multimedia/evento-live.jpg') center top / cover no-repeat; z-index: 0; }
         .event-section .event-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 70%, #000 100%); z-index: 1; }
         .event-content { position: relative; z-index: 2; text-align: center; color: white; padding-bottom: 40px; padding-left: 20px; padding-right: 20px; width: 100%; max-width: 800px; }
+        .live-tag { font-size: 0.7rem; color: #ff3b30; border: 1px solid #ff3b30; display: inline-block; padding: 4px 12px; border-radius: 20px; margin-bottom: 15px; font-weight: bold; letter-spacing: 2px; background: rgba(0,0,0,0.6); animation: pulse-red 2s infinite; }
+        .countdown { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .time-box { background: rgba(20,20,20,0.8); padding: 10px 15px; border-radius: 8px; min-width: 65px; border: 1px solid #333; backdrop-filter: blur(5px); }
+        .btn-event { padding: 15px 50px; background: linear-gradient(90deg, #00c3ff, #005f73); color: white; border: none; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; cursor: pointer; box-shadow: 0 0 20px rgba(0,195,255,0.4); clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%); }
+        @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        @media (max-width: 768px) { .event-section { height: 70vh; } }
     </style>
 </head>
 <body id="main-body">
-    
-    <!-- 0. HEADER MODULAR -->
+
+    <!-- CONTENEDOR HEADER -->
     <div id="header-placeholder"></div>
 
-    <!-- 1. HERO -->
-    <section class="parallax-section" style="background-image: url('multimedia/hero.jpg');">
+    <!-- 1. HERO SECTION -->
+    <section class="parallax-section" style="background-image: url('multimedia/hero.png');">
         <div class="overlay-text">
             <h1>Un Mañana Sin Sombras</h1>
             <p style="color:var(--cian); letter-spacing: 2px; font-weight:bold;">TECNOLOGÍA NEURONAL NIVEL 7</p>
         </div>
     </section>
 
-    <!-- 2. CATÁLOGO -->
+    <!-- 2. CATÁLOGO DE SUBMUNDOS -->
     <div class="section-title"><h2>Ecosistemas de Inmersión</h2><p>Toque un destino para sincronizar.</p></div>
     <div class="slider-wrapper" id="wrapper-catalog">
         <div class="slide-track" id="catalog-track">
-            <a href="olympus.html" class="slide-item"><img src="multimedia/Olympus.jpeg"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial.</p></div></a>
-            <a href="arcadia.html" class="slide-item"><img src="multimedia/arcadia.jpg"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></a>
-            <a href="beso.html" class="slide-item"><img src="multimedia/elbeso.jpg"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div></a>
-            <a href="neon.html" class="slide-item"><img src="multimedia/neonn.png"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Placer bajo vigilancia.</p></div></a>
-            <a href="chronos.html" class="slide-item"><img src="multimedia/chr.png"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></a>
-            <a href="coliseo.html" class="slide-item"><img src="multimedia/coliseo.jpg"><div class="label-overlay"><h3>Coliseo Etérico</h3><p>Forja tu leyenda.</p></div></a>
+            <a href="olympus.html" class="slide-item"><img src="multimedia/olympus.png"><div class="label-overlay"><h3>Olympus V-Games</h3><p>Redefina su potencial.</p></div></a>
+            <a href="arcadia.html" class="slide-item"><img src="multimedia/arcadia.png"><div class="label-overlay"><h3>Arcadia Eterna</h3><p>La pureza original.</p></div></a>
+            <a href="beso.html" class="slide-item"><img src="multimedia/beso.png"><div class="label-overlay"><h3>El Beso Prohibido</h3><p>Donde los adioses no existen.</p></div></a>
+            <a href="neon.html" class="slide-item"><img src="multimedia/neon.png"><div class="label-overlay"><h3>Neon Nirvana</h3><p>Placer bajo vigilancia.</p></div></a>
+            <a href="chronos.html" class="slide-item"><img src="multimedia/chronos.png"><div class="label-overlay"><h3>Chronos</h3><p>La historia en su piel.</p></div></a>
+            <a href="coliseo.html" class="slide-item"><img src="multimedia/coliseo.png"><div class="label-overlay"><h3>Coliseo Etérico</h3><p>Forja tu leyenda.</p></div></a>
         </div>
         <div class="dots-container" id="catalog-dots"></div>
     </div>
 
-    <!-- 2.5 EVENTO GLOBAL (JUEGOS ETÉRICOS) -->
+    <!-- 2.5 EVENTO GLOBAL -->
     <section class="event-section">
         <div class="event-bg"></div>
         <div class="event-overlay"></div>
         <div class="event-content">
-            <div class="live-badge">🔴 EN VIVO: TEMPORADA 47</div>
-            <h2 style="font-size: 2.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 10px; text-shadow: 0 0 20px rgba(0,195,255,0.6);">Juegos Etéricos</h2>
-            <p style="color: #ccc; margin-bottom: 25px; font-size: 1rem; text-shadow: 0 2px 5px #000;">La arena reclama sangre y Éter. ¿Responderás al llamado?</p>
+            <div class="live-tag">🔴 EN VIVO: TEMPORADA 47</div>
+            <h2 style="font-size: 2.5rem; font-weight: 800; text-transform: uppercase;">Juegos Etéricos</h2>
+            <p style="color: #ccc; margin-bottom: 25px;">La arena reclama sangre y Éter. ¿Responderás al llamado?</p>
             <div class="countdown">
-                <div class="time-box"><span id="d" style="font-size: 1.5rem; font-weight: bold;">04</span><br><span style="font-size: 0.6rem; color: #888;">DÍAS</span></div>
-                <div class="time-box"><span id="h" style="font-size: 1.5rem; font-weight: bold;">00</span><br><span style="font-size: 0.6rem; color: #888;">HRS</span></div>
-                <div class="time-box"><span id="m" style="font-size: 1.5rem; font-weight: bold;">00</span><br><span style="font-size: 0.6rem; color: #888;">MIN</span></div>
-                <div class="time-box"><span id="s" style="font-size: 1.5rem; font-weight: bold; color: #00c3ff;">00</span><br><span style="font-size: 0.6rem; color: #888;">SEG</span></div>
+                <div class="time-box"><span id="d">04</span><br><small>DÍAS</small></div>
+                <div class="time-box"><span id="h">00</span><br><small>HRS</small></div>
+                <div class="time-box"><span id="m">00</span><br><small>MIN</small></div>
+                <div class="time-box"><span id="s" style="color:#00c3ff">00</span><br><small>SEG</small></div>
             </div>
             <button class="btn-event" onclick="window.location.href='seguridad.html'">INSCRIPCIÓN DE CLAN</button>
         </div>
     </section>
 
     <!-- 3. CICLO DE RECARGA -->
-    <div class="section-title"><h2>Ciclo de Recarga</h2><p>Combustible biológico.</p></div>
+    <div class="section-title"><h2>Ciclo de Recarga</h2></div>
     <div class="slider-wrapper" id="wrapper-nutri">
         <div class="slide-track" id="nutri-track">
             <a href="solaris.html" class="slide-item"><img src="multimedia/solaris-web.png"><div class="label-overlay"><h3>FASE DIURNA: SOLARIS</h3><p>Voltaje puro.</p></div></a>
@@ -82,139 +77,94 @@
     </div>
 
     <!-- 4. MERCADO DE FE -->
-    <div class="section-title"><h2>Adquisición de FE</h2><p>Monetice su existencia.</p></div>
-    <div class="fe-container">
+    <div class="fe-container" style="margin-top:40px;">
         <div class="fe-card">
             <div class="fe-price">500 <small>FE</small></div>
-            <p>Acceso estándar.</p>
             <button class="btn-buy" onclick="iniciarSPN()">RECARGAR FE</button>
         </div>
         <div class="fe-card premium">
             <div class="fe-price">2,500 <small>FE</small></div>
-            <p>Estatus Premium.</p>
             <button class="btn-buy" style="background:var(--cian); color:#fff;" onclick="iniciarSPN()">RECARGAR FE</button>
-        </div>
-        <div class="fe-card">
-            <div class="fe-price">∞ <small>FE</small></div>
-            <p>Mecenazgo Corporativo.</p>
-            <button class="btn-buy" style="opacity:0.5; cursor:not-allowed;">REQUIERE NIVEL 7</button>
         </div>
     </div>
 
     <!-- 5. MECANICA SUEÑO -->
-    <section class="parallax-section" style="background-image: url('multimedia/sueño.jpg'); margin-top: 60px;">
+    <section class="parallax-section" style="background-image: url('multimedia/sueño.png'); margin-top: 60px;">
         <div class="overlay-text">
             <h2>Sincronía REM</h2>
             <button class="btn-buy" style="margin-top:20px; background:#000; color:#fff;" onclick="window.location.href='seguridad.html'">CONECTAR AHORA</button>
         </div>
     </section>
 
-    <!-- MODALES -->
-    <div id="spn-overlay" class="spn-overlay"><div class="spn-box"><div class="pulse-ring"></div><h3 style="color:var(--cian)">S.P.N. ACTIVO</h3><p id="spn-status" style="font-family:monospace; color:#666;">Buscando firma biométrica...</p><div id="spn-error" style="display:none;"><h3 style="color:red">FALLO DE ENLACE</h3><p style="font-size:0.8rem; margin:15px 0;">ERROR CRÍTICO [BIO-404]: No se detecta chip CNB-3. Transacción rechazada.</p><button class="btn-buy" onclick="document.getElementById('spn-overlay').style.display='none'">CERRAR</button></div></div></div>
+    <!-- MODALES S.P.N. -->
+    <div id="spn-overlay" class="spn-overlay"><div class="spn-box"><div class="pulse-ring"></div><h3 style="color:var(--cian)">S.P.N. ACTIVO</h3><p id="spn-status">Validando firma biométrica...</p><div id="spn-error" style="display:none;"><h3 style="color:red">FALLO DE ENLACE</h3><p style="font-size:0.8rem; margin:15px 0;">ERROR: No se detecta chip CNB-3.</p><button class="btn-buy" onclick="document.getElementById('spn-overlay').style.display='none'">CERRAR</button></div></div></div>
 
-    <!-- 6. FOOTER MODULAR -->
+    <!-- CONTENEDOR FOOTER -->
     <div id="footer-placeholder"></div>
-    
-    <!-- WIDGET MITE -->
+
+    <!-- SCRIPTS EXTERNOS -->
     <script src="mite.js"></script>
-    
-    <!-- SCRIPTS DE INICIACIÓN Y LÓGICA -->
+    <script src="puente.js"></script>
+
+    <!-- LÓGICA DE CONTROL -->
     <script>
-        // --- FUNCIÓN MAESTRA DE CARGA ASÍNCRONA ---
         async function iniciarSistema() {
             try {
-                // 1. Cargamos Header
-                const headerResponse = await fetch('header.html');
-                const headerData = await headerResponse.text();
-                document.getElementById('header-placeholder').innerHTML = headerData;
+                // Carga de componentes modulares
+                const h = await fetch('header.html').then(r => r.text());
+                document.getElementById('header-placeholder').innerHTML = h;
+                const f = await fetch('footer.html').then(r => r.text());
+                document.getElementById('footer-placeholder').innerHTML = f;
 
-                // 2. Cargamos Footer
-                const footerResponse = await fetch('footer.html');
-                const footerData = await footerResponse.text();
-                document.getElementById('footer-placeholder').innerHTML = footerData;
-
-                // 3. ACTIVAMOS LA PUERTA SECRETA (Solo cuando el footer existe)
-                const matrixTrigger = document.getElementById('matrix-trigger');
-                if (matrixTrigger) {
-                    matrixTrigger.addEventListener('click', function(e) {
+                // Activación de la Puerta Matrix (después de cargar el footer)
+                const trigger = document.getElementById('matrix-trigger');
+                if (trigger) {
+                    trigger.addEventListener('click', e => {
                         e.preventDefault();
                         document.body.classList.add('matrix-collapse');
                         setTimeout(() => { window.location.href = "sincro.html?nodo=login"; }, 2000);
                     });
                 }
-            } catch (error) {
-                console.error("Error cargando módulos:", error);
-            }
+            } catch (err) { console.error("Error en módulos", err); }
 
-            // 4. Inicializamos Sliders (independientes de la carga modular)
+            // Sliders e interfaz
             setupSlider('wrapper-catalog', 'catalog-track', 'catalog-dots', 6);
             setupSlider('wrapper-nutri', 'nutri-track', 'nutri-dots', 2);
-            
-            // 5. Iniciamos Reloj
             updateTimer();
         }
 
-        // --- FUNCIONES DE UTILIDAD ---
-        function setupSlider(wrapperId, trackId, dotsId, count) {
-            const wrapper = document.getElementById(wrapperId);
-            const track = document.getElementById(trackId);
-            const dotsContainer = document.getElementById(dotsId);
-            if (!wrapper || !track || !dotsContainer) return; // Protección contra errores
-            
-            let index = 0, startX = 0, currentTranslate = 0, prevTranslate = 0, isDragging = false, animationID;
-
+        function setupSlider(wId, tId, dId, count) {
+            const w = document.getElementById(wId), t = document.getElementById(tId), dC = document.getElementById(dId);
+            if (!w || !t) return;
+            let idx = 0, sX = 0, cT = 0, pT = 0, isD = false, aID;
             for(let i=0; i<count; i++) {
-                const dot = document.createElement('div'); dot.className = 'dot' + (i===0?' active':'');
-                dot.onclick = () => { index = i; setPosition(); };
-                dotsContainer.appendChild(dot);
+                const d = document.createElement('div'); d.className = 'dot' + (i===0?' active':'');
+                d.onclick = () => { idx = i; setP(); }; dC.appendChild(d);
             }
-
-            wrapper.addEventListener('touchstart', e => { isDragging = true; startX = e.touches[0].clientX; animationID = requestAnimationFrame(animation); });
-            wrapper.addEventListener('touchmove', e => { if(isDragging) currentTranslate = prevTranslate + e.touches[0].clientX - startX; });
-            wrapper.addEventListener('touchend', () => { isDragging = false; cancelAnimationFrame(animationID); const movedBy = currentTranslate - prevTranslate; if(movedBy < -100 && index < count-1) index++; if(movedBy > 100 && index > 0) index--; setPosition(); });
-            
-            function animation() { track.style.transform = `translateX(${currentTranslate}px)`; if(isDragging) requestAnimationFrame(animation); }
-            function setPosition() { currentTranslate = index * -wrapper.offsetWidth; prevTranslate = currentTranslate; track.style.transform = `translateX(${currentTranslate}px)`; const dots = dotsContainer.querySelectorAll('.dot'); dots.forEach((d, i) => d.className = 'dot' + (i===index?' active':'')); }
-            
-            setInterval(() => { if(!isDragging) { index = (index+1)%count; setPosition(); } }, 6000);
+            w.addEventListener('touchstart', e => { isD = true; sX = e.touches[0].clientX; aID = requestAnimationFrame(anim); });
+            w.addEventListener('touchmove', e => { if(isD) cT = pT + e.touches[0].clientX - sX; });
+            w.addEventListener('touchend', () => { isD = false; cancelAnimationFrame(aID); const m = cT - pT; if(m < -100 && idx < count-1) idx++; if(m > 100 && idx > 0) idx--; setP(); });
+            function anim() { t.style.transform = `translateX(${cT}px)`; if(isD) requestAnimationFrame(anim); }
+            function setP() { cT = idx * -w.offsetWidth; pT = cT; t.style.transform = `translateX(${cT}px)`; dC.querySelectorAll('.dot').forEach((d, i) => d.className = 'dot' + (i===idx?' active':'')); }
+            setInterval(() => { if(!isD) { idx = (idx+1)%count; setP(); } }, 6000);
         }
 
         function updateTimer() {
             const now = new Date();
             const h = document.getElementById('h'), m = document.getElementById('m'), s = document.getElementById('s');
-            if(h) h.innerText = 23 - now.getHours();
-            if(m) m.innerText = 59 - now.getMinutes();
-            if(s) s.innerText = 59 - now.getSeconds();
+            if (h) { h.innerText = 23 - now.getHours(); m.innerText = 59 - now.getMinutes(); s.innerText = 59 - now.getSeconds(); }
         }
         setInterval(updateTimer, 1000);
 
         function iniciarSPN() {
             document.getElementById('spn-overlay').style.display = 'flex';
-            setTimeout(() => { 
-                document.getElementById('spn-status').style.display='none'; 
-                document.getElementById('spn-error').style.display='block'; 
-                if(typeof window.miteResponder==="function") window.miteResponder('eter'); 
-            }, 3000);
+            setTimeout(() => { document.getElementById('spn-status').style.display='none'; document.getElementById('spn-error').style.display='block'; if(typeof window.miteResponder==="function") window.miteResponder('eter'); }, 3000);
         }
 
-        // --- SENSOR DE MOVIMIENTO ---
-        let lX, lY, lZ, lU = 0; 
-        window.addEventListener('devicemotion', e => { 
-            let acc=e.accelerationIncludingGravity, now=new Date().getTime(); 
-            if((now-lU)>100) { 
-                let diff=now-lU, speed=Math.abs(acc.x+acc.y+acc.z-lX-lY-lZ)/diff*10000; 
-                if(speed>2000) {
-                    document.body.classList.add('matrix-collapse');
-                    window.location.href="sincro.html?nodo=motion";
-                }
-                lX=acc.x; lY=acc.y; lZ=acc.z; lU=now; 
-            } 
-        });
+        // Sensor de Movimiento
+        let lX, lY, lZ, lU = 0; window.addEventListener('devicemotion', e => { let acc=e.accelerationIncludingGravity, now=new Date().getTime(); if((now-lU)>100) { let diff=now-lU, speed=Math.abs(acc.x+acc.y+acc.z-lX-lY-lZ)/diff*10000; if(speed>2000) { document.body.classList.add('matrix-collapse'); window.location.href="sincro.html?nodo=motion"; } lX=acc.x; lY=acc.y; lZ=acc.z; lU=now; } });
 
-        // --- ARRANCAR SISTEMA ---
         iniciarSistema();
-        <!-- En index.html de ambos repositorios -->
-        <script src="puente.js"></script>
     </script>
 </body>
-                                                                                                                                                     </html>
+                                                                                                                                                                                                         </html>
