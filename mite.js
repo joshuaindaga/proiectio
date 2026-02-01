@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         </div>
         
-        <img src="multimedia/mite.gif" id="mite-bubble" alt="Mite">
+        <img src="multimedia/mite.webp" id="mite-bubble" alt="Mite">
     `;
     document.body.appendChild(widget);
 
