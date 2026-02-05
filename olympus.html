@@ -98,11 +98,20 @@
     <!-- 0. HEADER MODULAR -->
     <div id="header-placeholder"></div>
 
-    <!-- 1. VIDEO PRINCIPAL (PROTAGONISTA) -->
+    <!-- 1. VIDEO PRINCIPAL (REFORJADO) -->
     <section class="video-showcase">
-        <!-- Reemplaza 'multimedia/nombre-video.mp4' por tu archivo -->
-        <video autoplay muted loop playsinline poster="multimedia/Olympus.jpeg">
+        <video autoplay muted loop playsinline 
+               poster="multimedia/Olympus.jpeg" 
+               style="width: 100%; height: auto; display: block;">
+            
+            <!-- Intento 1: WebM (Si existe y el navegador lo soporta) -->
             <source src="multimedia/olympus.webm" type="video/webm">
+            
+            <!-- Intento 2: MP4 (El respaldo universal) -->
+            <source src="multimedia/olympus.mp4" type="video/mp4">
+
+            <!-- Mensaje de error si nada funciona -->
+            Su dispositivo no soporta la visualización de este rastro de memoria.
         </video>
     </section>
 
